@@ -1,7 +1,7 @@
 {
-  "name": "@browser-modules/typescript.template",
+  "name": "@browser-modules/typescript.data.structures",
   "version": "1.0.24",
-  "description": "Typescript Base template for creating browser compatible ES6 modules, including unit tests and documentation",
+  "description": "Comparison of data structures implemented in TypeScript",
   "browser": "lib/Calculator.js",
   "files": [
     "lib/",
@@ -22,14 +22,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FlippieCoetser/typescript.template.git"
+    "url": "git+https://github.com/FlippieCoetser/typescript.data.structures.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/FlippieCoetser/typescript.template/issues"
+    "url": "https://github.com/FlippieCoetser/typescript.data.structures/issues"
   },
-  "homepage": "https://github.com/FlippieCoetser/typescript.template#readme",
+  "homepage": "https://github.com/FlippieCoetser/typescript.data.structures#readme",
   "devDependencies": {
     "@types/jasmine": "^5.1.4",
     "http-server": "^14.1.1",
