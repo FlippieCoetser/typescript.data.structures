@@ -596,19 +596,8 @@ function convertToTuple(data) {
 }
 
 function encodeNode(node, fullDetail = false) {
-    if (fullDetail) {
-        const metadataEncoded = node.metadata ? node.metadata.map(metadata => convertToTuple(metadata)) : [];
 
-        return [
-            node.id,
-            node.name,
-            node.coordinates || [0, 0],
-            node.icon || "🏥",
-            node.incoming || null,
-            Array.isArray(node.outgoing) ? node.outgoing : [node.outgoing || null],
-            metadataEncoded
-        ];
-    } else {
+    if (!fullDetail) {
         return [
             node.id,
             node.coordinates ? node.coordinates.x : 0,
@@ -616,6 +605,19 @@ function encodeNode(node, fullDetail = false) {
             node.icon || "🏥"
         ];
     }
+
+    const metadataEncoded = node.metadata ? node.metadata.map(metadata => convertToTuple(metadata)) : [];
+
+    return [
+        node.id,
+        node.name,
+        node.coordinates || [0, 0],
+        node.icon || "🏥",
+        node.incoming || null,
+        Array.isArray(node.outgoing) ? node.outgoing : [node.outgoing || null],
+        metadataEncoded
+    ];
+    
 }
 
 
@@ -633,7 +635,7 @@ function run() {
         ...pathway.end
     ];
 
-    console.log("Demo of tuple encoder",encodeNode(pathway.decision[0], true));
+    console.log("Demo of tuple encoder",encodeNode(pathway.decision[0], false));
 
     // Extracting links
     const links = pathway.path.map(link => ({
