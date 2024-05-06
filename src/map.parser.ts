@@ -1,6 +1,64 @@
 import * as d3 from 'd3';
 //import { map } from './map.example';
 
+
+type Distribution = {
+    distribution: string;
+    parameters: Array<{
+        [key: string]: number;
+    }>;
+};
+type Metadata = {
+    arrival?: Distribution;
+    duration?: Distribution;
+    prevalence?: Array<{
+        target: string;
+        probability: number;
+    }>;
+};
+type NodeType = {
+    id: string;
+    name: string;
+    incoming?: string;
+    outgoing?: string | string[];
+    metadata?: Metadata[];
+};
+type Path = {
+    id: string;
+    name: string;
+    source: string;
+    target: string;
+};
+type MinimumPathway = {
+    id: string;
+    name: string;
+    coordinates: {
+        x: number;
+        y: number;
+    };
+    icon: string;
+    start: NodeType;
+    workflow: NodeType[];
+    decision: NodeType[];
+    end: NodeType[];
+};
+type Pathway = {
+    id: string;
+    name: string;
+    coordinates: {
+        x: number;
+        y: number;
+    };
+    icon: string;
+    start: Node;
+    workflow: Node[];
+    decision: Node[];
+    delay?: Node[];
+    end: Node[];
+    path: Path[];
+};
+
+
 const map = {
     pathway: {
         id: "c4076ede-bddf-47f3-8237-5712b4d3eda6",
