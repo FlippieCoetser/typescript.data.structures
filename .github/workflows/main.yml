@@ -14,15 +14,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14.x' # Automatically use the latest version of Node.js 14
-      
-      - name: Install dependencies
-        run: npm ci
-        continue-on-error: true # Continue even if this step fails
+          node-version: '14.x' # Use the latest version of Node.js 14.x
 
-      - name: Print npm log if failure
-        if: failure() # Simplified conditional check
-        run: cat /home/runner/.npm/_logs/*-debug.log # Make sure this path is correct
-      
+      - name: Install dependencies
+        run: npm ci # Installs node modules as per the lock file
+
       - name: Run tests
-        run: npm test # Explicitly named this step for clarity
+        run: npm test # Executes tests
+
