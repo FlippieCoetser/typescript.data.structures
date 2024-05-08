@@ -1,4 +1,4 @@
-import { actor, pathway } from "./Types.js";
+import { actor, pathway } from "../src/Types.js";
 
 let initObjects = () => {
   // Object
