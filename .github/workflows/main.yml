@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -14,11 +14,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14.x' # Use the latest version of Node.js 14.x
+          node-version: '20.2.0'
 
       - name: Install dependencies
-        run: npm ci # Installs node modules as per the lock file
+        run: npm install
+        continue-on-error: true
+
+      - name: Print npm log if failure
+        if: ${{ failure() }}
+        run: cat /home/runner/.npm/_logs/*-debug.log
 
       - name: Run tests
-        run: npm test # Executes tests
-
+        run: npm test
