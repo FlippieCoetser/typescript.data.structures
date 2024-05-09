@@ -5,6 +5,7 @@ let initObjects = () => {
   let node: node = {
     id: "35c6779a-fd9d-4036-b1ab-af0b932fc903",
     name: "Start",
-    coordinates: { x: 0, y: 0 },
+    x: 0,
+    y: 0,
   };
 };

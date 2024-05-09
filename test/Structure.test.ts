@@ -1,4 +1,5 @@
 import { Structure } from "../src/Structure.js";
+import { node } from "../src/Types.js";
 
 describe("Given Structure imported", () => {
   it("Then Structure should exist", () => {
@@ -12,16 +13,17 @@ describe("Given Structure imported", () => {
   describe("When Structure.create is called with useTuple = true", () => {
     it("Then it should return a tuple", () => {
       let tuple = true;
-      expect(Structure.create(tuple, "1", "John")).toEqual(["1", "John"]);
+      let input = Structure.create(tuple, "1", "John", 0, 0);
+      let output: node = ["1", "John", 0, 0];
+      expect(input).toEqual(output);
     });
   });
   describe("When Structure.create is called with useTuple = false", () => {
     it("Then it should return an object", () => {
       let tuple = false;
-      expect(Structure.create(tuple, "1", "John")).toEqual({
-        id: "1",
-        name: "John",
-      });
+      let input = Structure.create(tuple, "1", "John", 0, 0);
+      let output: node = { id: "1", name: "John", x: 0, y: 0 };
+      expect(input).toEqual(output);
     });
   });
 });
