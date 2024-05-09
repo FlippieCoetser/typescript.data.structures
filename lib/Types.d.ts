@@ -4,6 +4,4 @@ export type actor = [id, name] | {
     id: id;
     name: name;
 };
-export type pathway = actor[] | {
-    pathway: actor[];
-};
+export type pathway = actor[];

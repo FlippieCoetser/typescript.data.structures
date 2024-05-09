@@ -29,6 +29,7 @@ type Path = {
     source: string;
     target: string;
 };
+
 type MinimumPathway = {
     id: string;
     name: string;
@@ -50,11 +51,11 @@ type Pathway = {
         y: number;
     };
     icon: string;
-    start: Node;
-    workflow: Node[];
-    decision: Node[];
-    delay?: Node[];
-    end: Node[];
+    start: NodeType;
+    workflow: NodeType[];
+    decision: NodeType[];
+    delay?: NodeType[];
+    end: NodeType[];
     path: Path[];
 };
 
