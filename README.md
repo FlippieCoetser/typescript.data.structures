@@ -13,15 +13,18 @@
 ### Memory Usage
 
 ```typescript
-let size_one = await performance.measureUserAgentSpecificMemory()
-add()
-let size_two = await performance.measureUserAgentSpecificMemory()
-let size_total = size_two - size_one
+let start = (performance as any).memory.usedJSHeapSize;
+let nodes: node[] = [];
+for (let i = 0; i < 10; i++) {
+  nodes.push({ id: `id${i}`, name: `name${i}`, x: i, y: i });
+}
+let end = (performance as any).memory.usedJSHeapSize;
+let size = end - start;
 logger({
-  type: 'memory',
-  size: size_total
-  operation: 'add'
-})
+  type: "memory",
+  size: size,
+  operation: "add",
+});
 ```
 
 ### Performance
