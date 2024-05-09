@@ -13,19 +13,29 @@
 ### Memory Usage
 
 ```typescript
-let size_one = = await performance.measureUserAgentSpecificMemory()
-operation()
-let size_two = = await performance.measureUserAgentSpecificMemory()
+let size_one = await performance.measureUserAgentSpecificMemory()
+add()
+let size_two = await performance.measureUserAgentSpecificMemory()
 let size_total = size_two - size_one
+logger({
+  type: 'memory',
+  size: size_total
+  operation: 'add'
+})
 ```
 
 ### Performance
 
 ```typescript
 let time_one = performance.now();
-operation();
+add();
 let time_two = performance.now();
 let time_total = time_two - time_one;
+logger({
+  type: "performance",
+  time: time_total,
+  operation: "add",
+});
 ```
 
 ## Operations
