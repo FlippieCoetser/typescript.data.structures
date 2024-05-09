@@ -1,18 +1,37 @@
-# Typescript Template
-A bundler-free typescript template used to create a browser-compatible ES6 module, including unit tests and documentation.
+# Typescript Data Structures and Algorithms
 
-## Use
-After creating a new repository using this template, update the `package.json`:
-1. `name`
-2. `description`
-3. `repository:url`
-4. `bugs:url`
-5. `homepage`
+## Data Structures
 
-After updating the `package.json` run:
-1. `npm install`
-2. `npm test`
-3. `npm run document`
-4. `npm run start`
+- Tuples
+- Arrays
 
-Happy coding!
+## Measurements
+
+- Memory Usage
+- Performance
+
+### Memory Usage
+
+```typescript
+let size_one = = await performance.measureUserAgentSpecificMemory()
+operation()
+let size_two = = await performance.measureUserAgentSpecificMemory()
+let size_total = size_two - size_one
+```
+
+### Performance
+
+```typescript
+let time_one = performance.now();
+operation();
+let time_two = performance.now();
+let time_total = time_two - time_one;
+```
+
+## Operations
+
+- Plot Node
+- Add Node
+- Remove Node
+- Find Specific Node by ID
+- Update Specific Node by ID
