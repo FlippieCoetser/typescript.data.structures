@@ -13,7 +13,7 @@ module.exports = function (config) {
     plugins: ["karma-*", require("./tasks/performanceReporter.js")],
     reporters: ["spec", "coverage-istanbul", "performance"],
     performanceReporter: {
-      path: "./output",
+      dir: "./output",
       filename: "performance.report.json",
     },
     coverageIstanbulInstrumenter: {

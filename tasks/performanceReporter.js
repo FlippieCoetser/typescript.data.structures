@@ -1,18 +1,19 @@
 const fs = require("fs");
+const path = require("path");
 
 function performanceReporter(config) {
   var results = [];
-  var path = "";
+  var dir = "";
 
   this.createReportDirectory = () => {
-    path = config?.performanceReporter?.path ?? "./output";
-    fs.mkdirSync(path, { recursive: true });
+    dir = config?.performanceReporter?.dir ?? "./output";
+    fs.mkdirSync(dir, { recursive: true });
     return this;
   };
   this.writeReportToFile = () => {
     let filename =
       config?.performanceReporter?.filename ?? "performance.report.json";
-    let filepath = require("path").join(path, filename);
+    let filepath = path.join(dir, filename);
     fs.writeFileSync(filepath, JSON.stringify(results, null, 2));
   };
 
