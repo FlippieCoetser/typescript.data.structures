@@ -10,7 +10,12 @@ module.exports = function (config) {
     preprocessors: {
       "src/**/!(*.test).js": ["karma-coverage-istanbul-instrumenter"],
     },
-    reporters: ["spec", "coverage-istanbul"],
+    plugins: ["karma-*", require("./tasks/performanceReporter.js")],
+    reporters: ["spec", "coverage-istanbul", "performance"],
+    performanceReporter: {
+      path: "./output",
+      filename: "performance.report.json",
+    },
     coverageIstanbulInstrumenter: {
       esModules: true,
     },
@@ -27,6 +32,6 @@ module.exports = function (config) {
     },
     browsers: ["Chrome_with_memory"],
     singleRun: true,
-    logLevel: config.LOG_DISABLE,
+    logLevel: config.DISABLE_LOG,
   });
 };
