@@ -22,7 +22,13 @@ function performanceReporter(config) {
   };
 
   this.onSpecComplete = (browser, result) => {
-    results.push(result);
+    if (result.properties != null) {
+      let output = {
+        spec: result.fullName,
+        measurement: result.properties,
+      };
+      results.push(output);
+    }
   };
 }
 
