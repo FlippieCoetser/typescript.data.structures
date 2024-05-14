@@ -3,9 +3,10 @@ import { Node, Graph } from "../src/Types.js";
 export class Simulator {
   private nodes: Graph = [];
 
-  generateNodes(count: number): Node[] {
+  generateNodes(count: number, newNode): Node[] {
     for (let i = 0; i < count; i++) {
-      this.nodes.push({ id: `node${i}`, name: `Node ${i}`, x: i, y: i });
+      let node = newNode();
+      this.nodes.push(node);
     }
     return this.nodes;
   }
