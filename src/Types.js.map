@@ -1,0 +1,1 @@
+{"version":3,"file":"Types.js","sourceRoot":"","sources":["Types.ts"],"names":[],"mappings":"","sourcesContent":["export type id = string;\nexport type name = string;\nexport type x = number;\nexport type y = number;\nexport type node = [id, name, x, y] | { id: id; name: name; x: x; y: y };\nexport type graph = node[];\n"]}
