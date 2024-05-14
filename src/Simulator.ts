@@ -4,7 +4,6 @@ export class Simulator {
   private nodes: Graph = [];
 
   generateNodes(count: number): Node[] {
-    let nodes: Graph = [];
     for (let i = 0; i < count; i++) {
       this.nodes.push({ id: `node${i}`, name: `Node ${i}`, x: i, y: i });
     }
