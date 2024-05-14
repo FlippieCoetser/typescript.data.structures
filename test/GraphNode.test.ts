@@ -18,5 +18,8 @@ describe("Given GraphNode is imported", () => {
     it("then node should contains property type with value object", () => {
       expect(node["type"]).toEqual("object");
     });
+    it("then node should contain a method called create", () => {
+      expect(node.create).toBeDefined();
+    });
   });
 });
