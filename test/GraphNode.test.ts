@@ -21,5 +21,26 @@ describe("Given GraphNode is imported", () => {
     it("then node should contain a method called create", () => {
       expect(node.create).toBeDefined();
     });
+    describe("when node.create() is called", () => {
+      let newNode;
+      beforeEach(() => {
+        newNode = node.create();
+      });
+      it("then a node of type object is returned", () => {
+        expect(typeof newNode).toEqual("object");
+      });
+      it("then the node should contain a property id", () => {
+        expect(newNode?.id).toBeDefined();
+      });
+      it("then the node should contain a property name", () => {
+        expect(newNode?.name).toBeDefined();
+      });
+      it("then the node should contain a property x", () => {
+        expect(newNode?.x).toBeDefined();
+      });
+      it("then the node should contain a property y", () => {
+        expect(newNode?.y).toBeDefined();
+      });
+    });
   });
 });
