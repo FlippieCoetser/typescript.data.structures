@@ -11,9 +11,10 @@ export class Simulator {
     return this.nodes;
   }
 
+  // TODO: Implement similar method to findNodes as done when creating a new Node
   findNodeById(id: string): Node | undefined {
     return this.nodes.find((node: any) => node.id === id);
   }
 
-  // TODO: Implement all Operations
+  // TODO: Implement all Operations as described in the README
 }
