@@ -43,8 +43,13 @@ logger({
 
 ## Operations
 
-- Plot Node
-- Add Node
-- Remove Node
-- Find Specific Node by ID
-- Update Specific Node by ID
+- Add Nodes
+- Find Nodes
+- Find Specific Node (example node with specific `id`)
+- Find Nodes by condition (example return all nodes with name is `Clinical Assessment`)
+- Update Nodes
+- Update Specific Node (example update node with specific `id`)
+- Update Nodes by condition (example update all nodes with name is `Clinical Assessment`)
+- Delete Nodes
+- Delete Specific Node (example delete node with specific `id`)
+- Delete Nodes by condition (example delete all nodes with name is `Clinical Assessment`)
