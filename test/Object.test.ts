@@ -1,8 +1,8 @@
 import { Simulator } from "../src/Simulator.js";
 import { Benchmark } from "./Benchmark.js";
 
-describe("Given Object are used", () => {
-  describe("when creating 1000 new nodes", () => {
+describe("Given Data Structure of Object type is used", () => {
+  describe("when adding 1000 new nodes", () => {
     let simulator: Simulator;
     beforeEach(() => {
       simulator = new Simulator();

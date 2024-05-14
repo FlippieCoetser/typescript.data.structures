@@ -1,17 +1,17 @@
-import { node, graph } from "../src/Types.js";
+import { Node, Graph } from "../src/Types.js";
 
 export class Simulator {
-  private nodes: graph = [];
+  private nodes: Graph = [];
 
-  generateNodes(count: number): node[] {
-    let nodes: graph = [];
+  generateNodes(count: number): Node[] {
+    let nodes: Graph = [];
     for (let i = 0; i < count; i++) {
       this.nodes.push({ id: `node${i}`, name: `Node ${i}`, x: i, y: i });
     }
     return this.nodes;
   }
 
-  findNodeById(id: string): node | undefined {
+  findNodeById(id: string): Node | undefined {
     return this.nodes.find((node: any) => node.id === id);
   }
 
