@@ -3,4 +3,5 @@ export class GraphNode {
   constructor(type: string) {
     this.type = type;
   }
+  public create = () => {};
 }
