@@ -7,7 +7,7 @@ describe("Given GraphNode is imported", () => {
   describe("Given new GraphNode called node is instantiated", () => {
     let node: GraphNode;
     beforeEach(() => {
-      node = new GraphNode("object");
+      node = new GraphNode("object", "small");
     });
     it("then node exist", () => {
       expect(node).toBeDefined();

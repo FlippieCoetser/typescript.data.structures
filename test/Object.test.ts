@@ -1,27 +1,39 @@
 import { Simulator } from "../src/Simulator.js";
 import { Benchmark } from "./Benchmark.js";
 import { GraphNode } from "../src/GraphNode.js";
+import { Detail, Type } from "../src/GraphNode.js";
 
-describe("Given Data Structure of Object type is used", () => {
-  let node: GraphNode;
-  let simulator: Simulator;
+describe("Given Object Data Structure is used", () => {
+  let type: Type;
   beforeEach(() => {
-    node = new GraphNode("object");
-    simulator = new Simulator();
+    type = "object";
   });
-  describe("when adding 1000 new nodes", () => {
-    it("then nodes should contain 1000 nodes taking a specific time to load into graph", () => {
-      let count = 1000;
-      let nodes = Benchmark.Performance(() =>
-        simulator.generateNodes(count, node.create)
-      );
-      expect(nodes.length).toEqual(count);
+  describe("and the Data Structure is small", () => {
+    let detail: Detail;
+    let node: GraphNode;
+    let simulator: Simulator;
+    beforeEach(() => {
+      detail = "small";
+      node = new GraphNode(type, detail);
+      simulator = new Simulator();
     });
-    it("then nodes should contain 1000 nodes using a specific amount of memory", () => {
-      let nodes = Benchmark.Memory(() =>
-        simulator.generateNodes(1000, node.create)
-      );
-      expect(nodes.length).toEqual(1000);
+    describe("when adding 1000 new nodes", () => {
+      let size: number;
+      beforeEach(() => {
+        size = 1000;
+      });
+      it("then the graph should contain 1000 nodes taking a specific time to load into graph", () => {
+        let graph = Benchmark.Performance(() =>
+          simulator.generateNodes(size, node.create)
+        );
+        expect(graph.length).toEqual(size);
+      });
+      it("then graph should contain 1000 nodes using a specific amount of memory", () => {
+        let graph = Benchmark.Memory(() =>
+          simulator.generateNodes(size, node.create)
+        );
+        expect(graph.length).toEqual(size);
+      });
     });
   });
 });
