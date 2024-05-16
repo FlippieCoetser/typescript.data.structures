@@ -1,19 +1,20 @@
-import { node, graph } from "../src/Types.js";
+import { Node, Graph } from "../src/Types.js";
 
 export class Simulator {
-  private nodes: graph = [];
+  private nodes: Graph = [];
 
-  generateNodes(count: number): node[] {
-    let nodes: graph = [];
+  generateNodes(count: number, newNode): Node[] {
     for (let i = 0; i < count; i++) {
-      this.nodes.push({ id: `node${i}`, name: `Node ${i}`, x: i, y: i });
+      let node = newNode();
+      this.nodes.push(node);
     }
     return this.nodes;
   }
 
-  findNodeById(id: string): node | undefined {
+  // TODO: Implement similar method to findNodes as done when creating a new Node
+  findNodeById(id: string): Node | undefined {
     return this.nodes.find((node: any) => node.id === id);
   }
 
-  // TODO: Implement all Operations
+  // TODO: Implement all Operations as described in the README
 }
