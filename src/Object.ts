@@ -1,6 +1,6 @@
 export const object = {
   small: {
-    create: () => ({
+    add: () => ({
       id: (Math.random() * 10).toString(),
       name: `node`,
       x: Math.random() * 10,
@@ -8,7 +8,7 @@ export const object = {
     }),
   },
   large: {
-    create: () => ({
+    add: () => ({
       id: (Math.random() * 10).toString(),
       name: `node`,
       incoming: "d5bc89b2-74ea-4d1a-a0ed-22f4de79a580",

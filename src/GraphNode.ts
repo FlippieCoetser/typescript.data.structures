@@ -11,8 +11,8 @@ export class GraphNode {
     this.type = type;
     this.detail = detail;
   }
-  public create = () =>
+  public add = () =>
     this.type === "object"
-      ? object[this.detail].create()
-      : tuple[this.detail].create();
+      ? object[this.detail].add()
+      : tuple[this.detail].add();
 }

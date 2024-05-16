@@ -18,13 +18,13 @@ describe("Given GraphNode is imported", () => {
     it("then node should contains property type with value object", () => {
       expect(node["type"]).toEqual("object");
     });
-    it("then node should contain a method called create", () => {
-      expect(node.create).toBeDefined();
+    it("then node should contain a method called add", () => {
+      expect(node.add).toBeDefined();
     });
     describe("when node.create() is called", () => {
       let newNode;
       beforeEach(() => {
-        newNode = node.create();
+        newNode = node.add();
       });
       it("then a node of type object is returned", () => {
         expect(typeof newNode).toEqual("object");

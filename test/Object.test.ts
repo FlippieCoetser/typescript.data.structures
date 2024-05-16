@@ -24,13 +24,13 @@ describe("Given Object Data Structure is used", () => {
       });
       it("then the graph should contain 1000 nodes taking a specific time to load into graph", () => {
         let graph = Benchmark.Performance(() =>
-          simulator.generateNodes(size, node.create)
+          simulator.generateNodes(size, node.add)
         );
         expect(graph.length).toEqual(size);
       });
       it("then graph should contain 1000 nodes using a specific amount of memory", () => {
         let graph = Benchmark.Memory(() =>
-          simulator.generateNodes(size, node.create)
+          simulator.generateNodes(size, node.add)
         );
         expect(graph.length).toEqual(size);
       });

@@ -43,13 +43,13 @@ logger({
 
 ## Operations
 
-- Add Nodes
-- Find Nodes
-- Find Specific Node (example node with specific `id`)
-- Find Nodes by condition (example return all nodes with name is `Clinical Assessment`)
-- Update Nodes
-- Update Specific Node (example update node with specific `id`)
-- Update Nodes by condition (example update all nodes with name is `Clinical Assessment`)
-- Delete Nodes
-- Delete Specific Node (example delete node with specific `id`)
-- Delete Nodes by condition (example delete all nodes with name is `Clinical Assessment`)
+- add
+- findAll
+- findById (return node with specific `id`)
+- findWhere (return nodes where condition match: name is `Clinical Assessment`)
+- updateAll
+- updateById (update and return node with specific `id`)
+- updateWhere (update and return nodes where condition match: name is `Clinical Assessment`)
+- deleteAll
+- deleteById (delete node with specific `id`)
+- deleteWhere (delete nodes where condition match: name is `Clinical Assessment`)

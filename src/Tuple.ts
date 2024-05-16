@@ -1,6 +1,6 @@
 export const tuple = {
   small: {
-    create: () => [
+    add: () => [
       (Math.random() * 10).toString(),
       `node`,
       Math.random() * 10,
@@ -8,7 +8,7 @@ export const tuple = {
     ],
   },
   large: {
-    create: () => [
+    add: () => [
       (Math.random() * 10).toString(),
       `node`,
       "d5bc89b2-74ea-4d1a-a0ed-22f4de79a580",
