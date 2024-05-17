@@ -1,3 +1,33 @@
+export type MinObject = {
+  id: string;
+  name: string;
+  x: number;
+  y: number;
+};
+
+
+type CoordinatePair = {
+  x: number;
+  y: number;
+};
+
+type UI = {
+  coordinates: CoordinatePair;
+  icon: string;
+};
+
+export type LargeObject = {
+  id: string;
+  name: string;
+  incoming: string;
+  outgoing: string | string[];
+  metadata: any;
+  ui: UI;
+};
+
+type NodeObject = MinObject | LargeObject;
+
+
 export const object = {
   small: {
     add: () => ({
@@ -5,42 +35,29 @@ export const object = {
       name: `node`,
       x: Math.random() * 10,
       y: Math.random() * 10,
-    }),
+    }) as MinObject,
 
-    findAll: (nodes) => nodes,
-    findById: (nodes, id) => nodes.find((node) => node.id === id),
-    findWhere: (nodes, key, value) => nodes.find((node) => node[key] === value),
+    findAll: (nodes: MinObject[]) =>
+      nodes,
 
-    updateAll: (nodes) => 
-      nodes.map((node) => {
-        // As discussed, this will increment the x value by 5
-        return { ...node, x: node.x + 5 };
-      }
-    ),
+    findById: (nodes: MinObject[], id: string) =>
+      nodes.find((node) => node.id === id),
 
-    updateById: (nodes, id) => 
-      nodes.map((node) => {
-        if (node.id === id) {
-          // As discussed, this will increment the x value by 5
-          return { ...node, x: node.x + 5 };
-        }
-        return node;
-      }
-    ),
+    findWhere: (nodes: MinObject[], key: string, value) =>
+      nodes.filter((node) => node[key] === value),
 
-    updateWhere: (nodes, key, value) => 
-      nodes.map((node) => {
-        if (node[key] === value) {
-          // As discussed, this will increment the x value by 5
-          return { ...node, x: node.x + 5 };
-        }
-        return node;
-      }
-    ),
+    updateAll: (nodes: MinObject[]) =>
+      nodes.map(node => ({ ...node, x: node.x + 5 })),
 
-    deleteAll: (nodes) => [],
-    deleteById: (nodes, id) => nodes.filter((node) => node.id !== id),
-    deleteWhere: (nodes, key, value) => nodes.filter((node) => node[key] !== value),
+    updateById: (nodes: MinObject[], id: string) =>
+      nodes.map(node => (node.id === id ? { ...node, x: node.x + 5 } : node)),
+
+    updateWhere: (nodes: MinObject[], key, value) =>
+      nodes.map(node => (node[key] === value ? { ...node, x: node.x + 5 } : node)),
+
+    deleteAll: (nodes: MinObject[]) => [],
+    deleteById: (nodes: MinObject[], id: string) => nodes.filter((node) => node.id !== id),
+    deleteWhere: (nodes: MinObject[], key: string, value) => nodes.filter((node) => node[key] !== value),
   },
   large: {
     add: () => ({
@@ -63,43 +80,31 @@ export const object = {
         },
         icon: "icon",
       },
-    }),
+    }) as LargeObject,
 
-    findAll: (nodes) => nodes,
-    findById: (nodes, id) => nodes.find((node) => node.id === id),
-    findWhere: (nodes, key, value) => nodes.find((node) => node[key] === value),
+    findAll: (nodes: LargeObject[]) => nodes,
+    findById: (nodes: LargeObject[], id: string) => nodes.find((node) => node.id === id),
+    findWhere: (nodes: LargeObject[], key: string, value) => nodes.filter((node) => node[key] === value),
 
-    updateAll: (nodes) => 
-      nodes.map((node) => {
-        // As discussed, this will increment the x value by 5
-        return { ...node, ui: { ...node.ui, coordinates: { x: node.ui.coordinates.x + 5, y: node.ui.coordinates.y } } };
-      }
-    ),
+    updateAll: (nodes) =>
+      nodes.map(node => ({ ...node, ui: { ...node.ui, coordinates: { x: node.ui.coordinates.x + 5, y: node.ui.coordinates.y } } })),
 
-    updateById: (nodes, id) => 
-      nodes.map((node) => {
-        if (node.id === id) {
-          // As discussed, this will increment the x value by 5
-          return { ...node, ui: { ...node.ui, coordinates: { x: node.ui.coordinates.x + 5, y: node.ui.coordinates.y } } };
-        }
-        return node;
-      }
-    ),
+    updateById: (nodes: LargeObject[], id: string) =>
+      nodes
+        .map(node => 
+          node.id !== id ?
+          node : 
+          ({ ...node, ui: { ...node.ui, coordinates: { x: node.ui.coordinates.x + 5, y: node.ui.coordinates.y } } })),
 
-    updateWhere: (nodes, key, value) => 
-      nodes.map((node) => {
-        if (node[key] === value) {
-          // As discussed, this will increment the x value by 5
-          return { ...node, ui: { ...node.ui, coordinates: { x: node.ui.coordinates.x + 5, y: node.ui.coordinates.y } } };
-        }
-        return node;
-      }
-    ),
+    updateWhere: (nodes: LargeObject[], key: string, value) =>
+      nodes
+        .map(node => 
+          node[key] !== value ? 
+          node : 
+          ({ ...node, ui: { ...node.ui, coordinates: { x: node.ui.coordinates.x + 5, y: node.ui.coordinates.y } } })),
 
     deleteAll: (nodes) => [],
-    deleteById: (nodes, id) => nodes.filter((node) => node.id !== id),
-    deleteWhere: (nodes, key, value) => nodes.filter((node) => node[key] !== value),
-
-
+    deleteById: (nodes: LargeObject[], id: string) => nodes.filter((node) => node.id !== id),
+    deleteWhere: (nodes: LargeObject[], key: string, value) => nodes.filter((node) => node[key] !== value),
   },
 };
