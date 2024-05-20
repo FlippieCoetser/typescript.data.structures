@@ -1,11 +1,20 @@
+const { time } = require("console");
 const path = require("path");
 
 module.exports = function (config) {
   config.set({
     frameworks: ["jasmine"],
+    client: {
+      jasmine: {
+        random: true,
+        timeoutInterval: 10000,
+      },
+    },
     files: [
       { pattern: "./src/**/*.js", type: "module" },
       { pattern: "./test/**/*.js", type: "module" },
+
+      { pattern: "./data/**/*.js", type: "module"},
     ],
     preprocessors: {
       "src/**/!(*.test).js": ["karma-coverage-istanbul-instrumenter"],
@@ -31,7 +40,11 @@ module.exports = function (config) {
       },
     },
     browsers: ["Chrome_with_memory"],
+    browserNoActivityTimeout: 50000,
+    browserDisconnectTimeout: 50000,
     singleRun: true,
-    logLevel: config.DISABLE_LOG,
+    logLevel: config.LOG_INFO,
+
+
   });
 };
