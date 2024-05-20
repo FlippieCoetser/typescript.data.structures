@@ -5,4 +5,5 @@ let node: Node = {
   name: "Start",
   x: 0,
   y: 0,
+  icon: "icon",
 };
