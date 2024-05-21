@@ -1,0 +1,76 @@
+import { GraphNode, Detail, Type } from "../src/GraphNode.js";
+import { Simulator } from "../src/Simulator.js";
+
+// import { nodes } from "../data/Nodes.js";
+
+import { pick_random_node } from "./Utils.js";
+
+
+// describe("Given GraphNode is imported", () => {
+//   it("then GraphNode should be defined", () => {
+//     expect(GraphNode).toBeDefined();
+//   });
+//   describe("Given new GraphNode called node is instantiated", () => {
+//     let node: GraphNode;
+//     beforeEach(() => {
+//       node = new GraphNode("object", "small");
+//     });
+//     it("then node exist", () => {
+//       expect(node).toBeDefined();
+//     });
+//     it("then node should contains private property type", () => {
+//       expect(node["type"]).toBeDefined();
+//     });
+//     it("then node should contains property type with value object", () => {
+//       expect(node["type"]).toEqual("object");
+//     });
+//     it("then node should contain a method called add", () => {
+//       expect(node.add).toBeDefined();
+//     });
+//     describe("when node.add() is called", () => {
+//       let newNode;
+//       beforeEach(() => {
+//         newNode = node.add();
+//       });
+//       it("then a node of type object is returned", () => {
+//         expect(typeof newNode).toEqual("object");
+//       });
+//       it("then the node should contain a property id", () => {
+//         expect(newNode?.id).toBeDefined();
+//       });
+//       it("then the node should contain a property name", () => {
+//         expect(newNode?.name).toBeDefined();
+//       });
+//       it("then the node should contain a property x", () => {
+//         expect(newNode?.x).toBeDefined();
+//       });
+//       it("then the node should contain a property y", () => {
+//         expect(newNode?.y).toBeDefined();
+//       });
+//     });
+
+//     it("then node should contain a method called findAll", () => {
+//       expect(node.findAll).toBeDefined();
+//     });
+//     describe("when node.findAll() is called", () => {
+//       let simulator;
+//       let detail: Detail;
+//       let type: Type;
+//       let node: GraphNode;
+//       let found_nodes: any[];
+//       let nodes;
+//       beforeEach(() => {
+//         simulator = new Simulator();
+//         detail = "small";
+//         type = "object";
+//         nodes = node.add()
+//       });
+//       it("then an array of nodes is returned", () => {
+//         expect(node.findAll(nodes)).toEqual(nodes);
+//       });
+//     });
+
+
+//   });
+
+// });
