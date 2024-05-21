@@ -1,6 +1,6 @@
-import { Node, id, name, x, y } from "./Types.js";
+import { Node, id, name, x, y, icon } from "./Types.js";
 
 export class Structure {
-  static create = (tuple: boolean, id: id, name: name, x: x, y: y): Node =>
-    tuple ? [id, name, x, y] : { id, name, x, y };
+  static create = (tuple: boolean, id: id, name: name, x: x, y: y, icon: icon): Node =>
+    tuple ? [id, name, x, y, icon] : { id, name, x, y, icon};
 }
