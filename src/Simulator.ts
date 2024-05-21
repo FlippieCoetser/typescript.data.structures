@@ -1,20 +1,20 @@
-import { Node, Graph } from "../src/Types.js";
+import { Node } from "../src/Types.js";
 
 export class Simulator {
-  private nodes: Graph = [];
+  addNodes = (count: number, newNode: Function): Node[] => Array.from({ length: count }, () => newNode());
 
-  generateNodes(count: number, newNode): Node[] {
-    for (let i = 0; i < count; i++) {
-      let node = newNode();
-      this.nodes.push(node);
-    }
-    return this.nodes;
-  }
+  findAllNodes = (nodes, findAllNodesMethod: Function): Node[] => findAllNodesMethod(nodes);
+  findNodeById = (nodes, id: string, findNodeByIDMethod: Function): Node | undefined => findNodeByIDMethod(nodes, id);
+  findNodesWhere = (nodes, key: string, value, findNodesWhereMethod: Function): Node[] =>
+    findNodesWhereMethod(nodes, key, value);
 
-  // TODO: Implement similar method to findNodes as done when creating a new Node
-  findNodeById(id: string): Node | undefined {
-    return this.nodes.find((node: any) => node.id === id);
-  }
-
-  // TODO: Implement all Operations as described in the README
+  updateAllNodes = (nodes, updateAllNodesMethod: Function): Node[] => updateAllNodesMethod(nodes);
+  updateNodeById = (nodes, id: string, updateNodeByIDMethod: Function): Node[] => updateNodeByIDMethod(nodes, id);
+  updateNodesWhere = (nodes, key: string, value, updateNodesWhereMethod: Function): Node[] => 
+    updateNodesWhereMethod(nodes, key, value);
+  
+  deleteAllNodes = (nodes, deleteAllNodesMethod?): Node[] => deleteAllNodesMethod(nodes);
+  deleteNodeById = (nodes, id: string, deleteNodeByIDMethod: Function): Node[] => deleteNodeByIDMethod(nodes, id);
+  deleteNodesWhere = (nodes, key: string, value, deleteNodesWhereMethod: Function): Node[] => 
+    deleteNodesWhereMethod(nodes, key, value);
 }
