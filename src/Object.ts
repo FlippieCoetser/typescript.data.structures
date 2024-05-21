@@ -1,10 +1,19 @@
+import { increment_tuple_x_coordinate } from "./Tuple";
+
+type ID = string;
+type Name = string;
+type Incoming = string | string[];
+type Outgoing = string | string[];
+type Metadata = any;
+type Icon = string;
+
+
 export type MinObject = {
-  id: string;
-  name: string;
+  id: ID;
+  name: Name;
   x: number;
   y: number;
 };
-
 
 type CoordinatePair = {
   x: number;
@@ -13,19 +22,72 @@ type CoordinatePair = {
 
 type UI = {
   coordinates: CoordinatePair;
-  icon: string;
+  icon: Icon;
 };
 
 export type LargeObject = {
-  id: string;
-  name: string;
-  incoming: string;
-  outgoing: string | string[];
-  metadata: any;
+  id: ID;
+  name: Name;
+  incoming: Incoming;
+  outgoing: Outgoing;
+  metadata: Metadata;
   ui: UI;
 };
 
 type NodeObject = MinObject | LargeObject;
+
+
+
+/**
+ * An object can be small or large. If an object is large, it will have nested objects with nested properties. 
+ * To filter a graph of nodes by a key-value pair, we need to traverse the graph and check if the key-value pair exists in the graph.
+ */
+// export const hasKeyValuePair = (obj, key: string, value) => {
+//   if (obj.hasOwnProperty(key) && obj[key] === value) {
+//     return true;
+//   }
+//   for (let i in obj) {
+//     if (typeof obj[i] === 'object') {
+//       if (hasKeyValuePair(obj[i], key, value)) {
+//         return true;
+//       }
+//     }
+//   }
+//   return false;
+// }
+
+export function hasKeyValuePair (obj, key: string, value) {
+  if (Array.isArray(obj[key]) && obj[key].includes(value)) {
+    return true;
+  }
+
+  if (obj[key] === value) {
+    return true;
+  }
+
+  for (let i in obj) {
+    if (typeof obj[i] === 'object') {
+      if (hasKeyValuePair(obj[i], key, value)) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+export const increment_object_x_coordinate = (object: LargeObject, amount: number = 5) => {
+  return {
+    ...object,
+    ui: {
+      ...object.ui,
+      coordinates: {
+        x: object.ui.coordinates.x + amount,
+        y: object.ui.coordinates.y,
+      },
+    },
+  };
+}
 
 
 export const object = {
@@ -35,29 +97,21 @@ export const object = {
       name: `node`,
       x: Math.random() * 10,
       y: Math.random() * 10,
+      icon: "icon",
     }) as MinObject,
 
-    findAll: (nodes: MinObject[]) =>
-      nodes,
+    findAll: (nodes: MinObject[]) => nodes,
+    findById: (nodes: MinObject[], id: string) => nodes.find(node => node.id === id),
+    findWhere: (nodes: MinObject[], key: string, value) => nodes.filter(node => hasKeyValuePair(node, key, value)),
 
-    findById: (nodes: MinObject[], id: string) =>
-      nodes.find((node) => node.id === id),
-
-    findWhere: (nodes: MinObject[], key: string, value) =>
-      nodes.filter((node) => node[key] === value),
-
-    updateAll: (nodes: MinObject[]) =>
-      nodes.map(node => ({ ...node, x: node.x + 5 })),
-
-    updateById: (nodes: MinObject[], id: string) =>
-      nodes.map(node => (node.id === id ? { ...node, x: node.x + 5 } : node)),
-
+    updateAll: (nodes: MinObject[]) => nodes.map(node => ({ ...node, x: node.x + 5 })),
+    updateById: (nodes: MinObject[], id: string) => nodes.map(node => node.id === id ? { ...node, x: node.x + 5 } : node),
     updateWhere: (nodes: MinObject[], key, value) =>
-      nodes.map(node => (node[key] === value ? { ...node, x: node.x + 5 } : node)),
+      nodes.map(node => hasKeyValuePair(node, key, value) ? { ...node, x: node.x + 5 } : node),
 
     deleteAll: (nodes: MinObject[]) => [],
-    deleteById: (nodes: MinObject[], id: string) => nodes.filter((node) => node.id !== id),
-    deleteWhere: (nodes: MinObject[], key: string, value) => nodes.filter((node) => node[key] !== value),
+    deleteById: (nodes: MinObject[], id: string) => nodes.filter(node => node.id !== id),
+    deleteWhere: (nodes: MinObject[], key: string, value) => nodes.filter(node => !hasKeyValuePair(node, key, value)),
   },
   large: {
     add: () => ({
@@ -83,28 +137,16 @@ export const object = {
     }) as LargeObject,
 
     findAll: (nodes: LargeObject[]) => nodes,
-    findById: (nodes: LargeObject[], id: string) => nodes.find((node) => node.id === id),
-    findWhere: (nodes: LargeObject[], key: string, value) => nodes.filter((node) => node[key] === value),
+    findById: (nodes: LargeObject[], id: string) => nodes.find(node => node.id === id),
+    findWhere: (nodes: LargeObject[], key: string, value) => nodes.filter(node => hasKeyValuePair(node, key, value)),
 
-    updateAll: (nodes) =>
-      nodes.map(node => ({ ...node, ui: { ...node.ui, coordinates: { x: node.ui.coordinates.x + 5, y: node.ui.coordinates.y } } })),
-
-    updateById: (nodes: LargeObject[], id: string) =>
-      nodes
-        .map(node => 
-          node.id !== id ?
-          node : 
-          ({ ...node, ui: { ...node.ui, coordinates: { x: node.ui.coordinates.x + 5, y: node.ui.coordinates.y } } })),
-
+    updateAll: (nodes) => nodes.map(increment_object_x_coordinate),
+    updateById: (nodes: LargeObject[], id: string) => nodes.map(node => node.id !== id ? node : increment_object_x_coordinate(node)),
     updateWhere: (nodes: LargeObject[], key: string, value) =>
-      nodes
-        .map(node => 
-          node[key] !== value ? 
-          node : 
-          ({ ...node, ui: { ...node.ui, coordinates: { x: node.ui.coordinates.x + 5, y: node.ui.coordinates.y } } })),
+      nodes.map(node => hasKeyValuePair(node, key, value) ? increment_object_x_coordinate(node) : node),
 
     deleteAll: (nodes) => [],
-    deleteById: (nodes: LargeObject[], id: string) => nodes.filter((node) => node.id !== id),
-    deleteWhere: (nodes: LargeObject[], key: string, value) => nodes.filter((node) => node[key] !== value),
+    deleteById: (nodes: LargeObject[], id: string) => nodes.filter(node => node.id !== id),
+    deleteWhere: (nodes: LargeObject[], key: string, value) => nodes.filter(node => !hasKeyValuePair(node, key, value)),
   },
 };
