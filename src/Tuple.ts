@@ -5,6 +5,7 @@ export const tuple = {
       `node`,
       Math.random() * 10,
       Math.random() * 10,
+      `icon`,
     ],
   },
   large: {
