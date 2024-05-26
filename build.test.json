@@ -1,14 +1,29 @@
 {
-  "_comments": "ES2020 adds support for dynamic imports and import.meta",
   "compilerOptions": {
-    "module": "es2020",
-    "target": "es2020",
+    "module": "es2022",
+    "target": "es2022",
     "moduleResolution": "node",
     "sourceMap": true,
-    "inlineSources": true
+    "inlineSources": true,
+    "baseUrl": "./",
+    "paths": {
+      "utilities": ["./src/utilities/Utilities.js"],
+      "types": ["./src/Generic.types.js"],
+      "object": ["./src/Object.js"],
+      "tuple": ["./src/Tuple.js"],
+      "graph": ["./src/Graph.js"]
+    }
   },
   "include": ["./src/**/*", "./test/**/*"],
   "typedocOptions": {
+    "entryPoints": [
+      "./src/Object.ts",
+      "./src/Tuple.ts",
+      "./src/Graph.ts",
+      "./src/utilities/Utilities.ts",
+      "./src/Generic.types.ts",
+      "./src/Types.ts"
+    ],
     "excludePrivate": true,
     "excludeProtected": true,
     "disableSources": true,

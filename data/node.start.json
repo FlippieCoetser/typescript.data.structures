@@ -1,0 +1,15 @@
+{
+  "id": "35c6779a-fd9d-4089-d1ab-af0b932fc912",
+  "name": "Start",
+  "type": "start",
+  "coordinates": { "x": 0, "y": 400 },
+  "icon": "icon.svg",
+  "metadata": [
+    {
+      "arrival": {
+        "distribution": "exponential",
+        "parameters": [{ "rate": 0.005469098 }]
+      }
+    }
+  ]
+}

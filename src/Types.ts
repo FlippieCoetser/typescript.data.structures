@@ -1,6 +1,8 @@
-export type id = string;
-export type name = string;
-export type x = number;
-export type y = number;
-export type Node = [id, name, x, y] | { id: id; name: name; x: x; y: y } | null;
-export type Graph = Node[];
+import { ObjectNode, ObjectConnection, ObjectPathway } from "./Object.js";
+import { TupleNode, TupleConnection, TuplePathway } from "./Tuple.js";
+
+export type Node = ObjectNode | TupleNode;
+export type Nodes = Node[];
+export type Connection = ObjectConnection | TupleConnection;
+export type Connections = Connection[];
+export type Graph = ObjectPathway | TuplePathway;

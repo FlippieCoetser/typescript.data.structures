@@ -1,14 +1,18 @@
 {
-  "_comments": "ES2020 adds support for dynamic imports and import.meta. paths includes an example of mapping npm module name to a local path",
   "compilerOptions": {
-    "module": "es2020",
-    "target": "es2020",
+    "module": "es2022",
+    "target": "es2022",
     "moduleResolution": "node",
     "declaration": true,
     "rootDir": "./src",
     "outDir": "./lib/",
+    "baseUrl": "./",
     "paths": {
-      "calculator": ["./src/Calculator.js"]
+      "utilities": ["./src/utilities/Utilities.js"],
+      "types": ["./src/Generic.types.js"],
+      "object": ["./src/Object.js"],
+      "tuple": ["./src/Tuple.js"],
+      "graph": ["./src/Graph.js"]
     }
   },
   "include": ["./src/**/*"]

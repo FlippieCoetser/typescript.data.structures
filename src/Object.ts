@@ -1,33 +1,63 @@
-export const object = {
-  small: {
-    add: () => ({
-      id: (Math.random() * 10).toString(),
-      name: `node`,
-      x: Math.random() * 10,
-      y: Math.random() * 10,
-    }),
-  },
-  large: {
-    add: () => ({
-      id: (Math.random() * 10).toString(),
-      name: `node`,
-      incoming: "d5bc89b2-74ea-4d1a-a0ed-22f4de79a580",
-      outgoing: "d4ae89b2-74ea-4d1a-a0ed-22f4de79a580",
-      metadata: [
-        {
-          duration: {
-            distribution: "log normal",
-            parameters: [{ meanlog: 0.1640238 }, { sdlog: 0.4169375 }],
-          },
-        },
-      ],
-      ui: {
-        coordinates: {
-          x: Math.random() * 10,
-          y: Math.random() * 10,
-        },
-        icon: "icon",
-      },
-    }),
-  },
+import { Utilities } from "./utilities/Utilities.js";
+
+import { UUID, NodeType, Icon, Metadata, GraphMeta } from "./Generic.types.js";
+
+export type ObjectCoordinates = {
+  x: number;
+  y: number;
 };
+
+export type ObjectNode = {
+  id: UUID;
+  name: string;
+  type: NodeType;
+  coordinates: ObjectCoordinates;
+  icon?: Icon;
+  metadata?: Metadata[];
+};
+
+export type ConnectionCoordinates = {
+  start: ObjectCoordinates;
+  end: ObjectCoordinates;
+};
+
+export type ObjectConnection = {
+  id: UUID;
+  name: string;
+  source: UUID;
+  target: UUID;
+  coordinates: ConnectionCoordinates;
+};
+
+export type ObjectPathway = {
+  graph: GraphMeta;
+  nodes: ObjectNode[];
+  connections: ObjectConnection[];
+};
+
+export class Object {
+  public static structure = "object";
+  public static create = ({ name, type, coordinates, icon }): ObjectNode => ({
+    id: Utilities.uuid,
+    name,
+    type,
+    coordinates,
+    icon,
+  });
+
+  public static extend = (
+    node: ObjectNode,
+    metadata: Metadata
+  ): ObjectNode => ({
+    ...node,
+    metadata: node.metadata ? [...node.metadata, metadata] : [metadata],
+  });
+
+  public static move = (
+    node: ObjectNode,
+    coordinates: ObjectCoordinates
+  ): ObjectNode => ({
+    ...node,
+    coordinates,
+  });
+}

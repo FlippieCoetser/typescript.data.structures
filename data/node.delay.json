@@ -1,0 +1,7 @@
+{
+  "id": "d570e3a3-0396-49a8-8f92-32eaf1ecdcaa",
+  "name": "Delay",
+  "type": "delay",
+  "coordinates": { "x": 1100, "y": 400 },
+  "icon": "icon.svg"
+}

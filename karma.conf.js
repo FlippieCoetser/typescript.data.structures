@@ -3,7 +3,12 @@ const path = require("path");
 module.exports = function (config) {
   config.set({
     frameworks: ["jasmine"],
+    proxies: {
+      "/src/": "/base/src/",
+      "/test/": "/base/test/",
+    },
     files: [
+      { pattern: "./importmap.js" },
       { pattern: "./src/**/*.js", type: "module" },
       { pattern: "./test/**/*.js", type: "module" },
     ],
@@ -32,6 +37,6 @@ module.exports = function (config) {
     },
     browsers: ["Chrome_with_memory"],
     singleRun: true,
-    logLevel: config.DISABLE_LOG,
+    logLevel: config.LOG_DISABLED,
   });
 };

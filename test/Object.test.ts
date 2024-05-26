@@ -1,283 +1,190 @@
-import { Simulator } from "../src/Simulator.js";
-import { Benchmark } from "./Benchmark.js";
-import { GraphNode } from "../src/GraphNode.js";
-import { Detail, Type } from "../src/GraphNode.js";
+import { Utilities } from "utilities";
+import { NodeTypes, NodeType, Metadata } from "types";
 
-describe("Given Object Data Structure is used", () => {
-  let type: Type;
-  beforeEach(() => {
-    type = "object";
+import { Object, ObjectNode, ObjectCoordinates } from "object";
+
+describe("Given Object imported", () => {
+  it("then Objet is defined", () => {
+    expect(Object).toBeDefined();
   });
-  describe("and the Data Structure is small", () => {
-    let detail: Detail;
-    let node: GraphNode;
-    let simulator: Simulator;
+  it("then Object.structure static property is defined", () => {
+    expect(Object.structure).toBeDefined();
+  });
+  it("then Object.create static method is defined", () => {
+    expect(Object.create).toBeDefined();
+  });
+  it("then Object.extend static method is defined", () => {
+    expect(Object.extend).toBeDefined();
+  });
+  it("then Object.move static method is defined", () => {
+    expect(Object.move).toBeDefined();
+  });
+});
+
+describe("Given Object.structure static property exist", () => {
+  it("then Object.structure equals object", () => {
+    expect(Object.structure).toEqual("object");
+  });
+});
+
+describe("Given Object.create static method exist", () => {
+  describe("when node = Object.create(details)", () => {
+    let details;
+    let node: ObjectNode;
     beforeEach(() => {
-      detail = "small";
-      node = new GraphNode(type, detail);
-      simulator = new Simulator();
+      details = {
+        name: "Node",
+        type: Utilities.getRandomElement<NodeType>(NodeTypes),
+        coordinates: { x: 0, y: 0 },
+        icon: "./icon.svg",
+      };
+      node = Object.create(details);
     });
-    describe("when adding 1 new nodes", () => {
-      let size: number;
-      beforeEach(() => {
-        size = 1;
-      });
-      it("then the graph should contain 1 nodes taking a specific time to load into graph", () => {
-        let graph = Benchmark.Performance(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
-      it("then graph should contain 1 nodes using a specific amount of memory", () => {
-        let graph = Benchmark.Memory(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
+    it("then node is exist", () => {
+      expect(node).toBeDefined();
     });
-    describe("when adding 10 new nodes", () => {
-      let size: number;
-      beforeEach(() => {
-        size = 10;
-      });
-      it("then the graph should contain 10 nodes taking a specific time to load into graph", () => {
-        let graph = Benchmark.Performance(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
-      it("then graph should contain 10 nodes using a specific amount of memory", () => {
-        let graph = Benchmark.Memory(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
+    it("then node.id exist", () => {
+      expect(node.id).toBeDefined();
     });
-    describe("when adding 100 new nodes", () => {
-      let size: number;
-      beforeEach(() => {
-        size = 100;
-      });
-      it("then the graph should contain 100 nodes taking a specific time to load into graph", () => {
-        let graph = Benchmark.Performance(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
-      it("then graph should contain 100 nodes using a specific amount of memory", () => {
-        let graph = Benchmark.Memory(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
+    it("then node.name exist", () => {
+      expect(node.name).toBeDefined();
     });
-    describe("when adding 1000 new nodes", () => {
-      let size: number;
-      beforeEach(() => {
-        size = 1000;
-      });
-      it("then the graph should contain 1000 nodes taking a specific time to load into graph", () => {
-        let graph = Benchmark.Performance(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
-      it("then graph should contain 1000 nodes using a specific amount of memory", () => {
-        let graph = Benchmark.Memory(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
+    it("then node.type exist", () => {
+      expect(node.type).toBeDefined();
     });
-    describe("when adding 10000 new nodes", () => {
-      let size: number;
-      beforeEach(() => {
-        size = 10000;
-      });
-      it("then the graph should contain 10000 nodes taking a specific time to load into graph", () => {
-        let graph = Benchmark.Performance(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
-      it("then graph should contain 10000 nodes using a specific amount of memory", () => {
-        let graph = Benchmark.Memory(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
+    it("then node.coordinates exist", () => {
+      expect(node.coordinates).toBeDefined();
     });
-    describe("when adding 100000 new nodes", () => {
-      let size: number;
-      beforeEach(() => {
-        size = 100000;
-      });
-      it("then the graph should contain 100000 nodes taking a specific time to load into graph", () => {
-        let graph = Benchmark.Performance(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
-      it("then graph should contain 100000 nodes using a specific amount of memory", () => {
-        let graph = Benchmark.Memory(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
+    it("then node.icon exist", () => {
+      expect(node.icon).toBeDefined();
     });
-    describe("when adding 1000000 new nodes", () => {
-      let size: number;
-      beforeEach(() => {
-        size = 1000000;
-      });
-      it("then the graph should contain 100000 nodes taking a specific time to load into graph", () => {
-        let graph = Benchmark.Performance(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
-      it("then graph should contain 1000000 nodes using a specific amount of memory", () => {
-        let graph = Benchmark.Memory(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
+    it("then node.name equals details.name", () => {
+      expect(node.name).toBe(details.name);
+    });
+    it("then node.type equals details.type", () => {
+      expect(node.type).toEqual(details.type);
+    });
+    it("then node.coordinates equals details.coordinates", () => {
+      expect(node.coordinates).toEqual(details.coordinates);
+    });
+    it("then node.icon equals details.icon", () => {
+      expect(node.icon).toEqual(details.icon);
     });
   });
-  describe("and the Data Structure is large", () => {
-    let detail: Detail;
-    let node: GraphNode;
-    let simulator: Simulator;
+});
+
+describe("Given Object.extend static method exist", () => {
+  describe("when extendedNode = Object.extend(node, metadata)", () => {
+    let node: ObjectNode;
+    let metadata: Metadata;
+    let extendedNode: ObjectNode;
     beforeEach(() => {
-      detail = "large";
-      node = new GraphNode(type, detail);
-      simulator = new Simulator();
+      node = Object.create({
+        name: "Node",
+        type: Utilities.getRandomElement<NodeType>(NodeTypes),
+        coordinates: { x: 0, y: 0 },
+        icon: "./icon.svg",
+      });
+      metadata = {
+        arrival: {
+          distribution: "exponential",
+          parameters: [{ rate: 1 }],
+        },
+      };
+      extendedNode = Object.extend(node, metadata);
     });
-    describe("when adding 1 new nodes", () => {
-      let size: number;
-      beforeEach(() => {
-        size = 1;
-      });
-      it("then the graph should contain 1 nodes taking a specific time to load into graph", () => {
-        let graph = Benchmark.Performance(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
-      it("then graph should contain 1 nodes using a specific amount of memory", () => {
-        let graph = Benchmark.Memory(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
+    it("then extendedNode exist", () => {
+      expect(extendedNode).toBeDefined();
     });
-    describe("when adding 10 new nodes", () => {
-      let size: number;
-      beforeEach(() => {
-        size = 10;
-      });
-      it("then the graph should contain 10 nodes taking a specific time to load into graph", () => {
-        let graph = Benchmark.Performance(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
-      it("then graph should contain 10 nodes using a specific amount of memory", () => {
-        let graph = Benchmark.Memory(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
+    it("then extendedNode.id exist", () => {
+      expect(extendedNode.id).toBeDefined();
     });
-    describe("when adding 100 new nodes", () => {
-      let size: number;
-      beforeEach(() => {
-        size = 100;
-      });
-      it("then the graph should contain 100 nodes taking a specific time to load into graph", () => {
-        let graph = Benchmark.Performance(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
-      it("then graph should contain 100 nodes using a specific amount of memory", () => {
-        let graph = Benchmark.Memory(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
+    it("then extendedNode.name exist", () => {
+      expect(extendedNode.name).toBeDefined();
     });
-    describe("when adding 1000 new nodes", () => {
-      let size: number;
-      beforeEach(() => {
-        size = 1000;
-      });
-      it("then the graph should contain 1000 nodes taking a specific time to load into graph", () => {
-        let graph = Benchmark.Performance(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
-      it("then graph should contain 1000 nodes using a specific amount of memory", () => {
-        let graph = Benchmark.Memory(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
+    it("then extendedNode.type exist", () => {
+      expect(extendedNode.type).toBeDefined();
     });
-    describe("when adding 10000 new nodes", () => {
-      let size: number;
-      beforeEach(() => {
-        size = 10000;
-      });
-      it("then the graph should contain 10000 nodes taking a specific time to load into graph", () => {
-        let graph = Benchmark.Performance(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
-      it("then graph should contain 10000 nodes using a specific amount of memory", () => {
-        let graph = Benchmark.Memory(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
+    it("then extendedNode.coordinates exist", () => {
+      expect(extendedNode.coordinates).toBeDefined();
     });
-    describe("when adding 100000 new nodes", () => {
-      let size: number;
-      beforeEach(() => {
-        size = 100000;
-      });
-      it("then the graph should contain 100000 nodes taking a specific time to load into graph", () => {
-        let graph = Benchmark.Performance(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
-      it("then graph should contain 100000 nodes using a specific amount of memory", () => {
-        let graph = Benchmark.Memory(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
+    it("then extendedNode.icon exist", () => {
+      expect(extendedNode.icon).toBeDefined();
     });
-    describe("when adding 1000000 new nodes", () => {
-      let size: number;
-      beforeEach(() => {
-        size = 1000000;
+    it("then extendedNode.metadata exist", () => {
+      expect(extendedNode.metadata).toBeDefined();
+    });
+    it("then extendedNode.id equals node.id", () => {
+      expect(extendedNode.id).toEqual(node.id);
+    });
+    it("then extendedNode.name equals node.name", () => {
+      expect(extendedNode.name).toEqual(node.name);
+    });
+    it("then extendedNode.type equals node.type", () => {
+      expect(extendedNode.type).toEqual(node.type);
+    });
+    it("then extendedNode.coordinates equals node.coordinates", () => {
+      expect(extendedNode.coordinates).toEqual(node.coordinates);
+    });
+    it("then extendedNode.icon equals node.icon", () => {
+      expect(extendedNode.icon).toEqual(node.icon);
+    });
+    it("then result.metadata equals metadata", () => {
+      expect(extendedNode.metadata[0]).toEqual(metadata);
+    });
+  });
+});
+
+describe("Given Object.move static method exist", () => {
+  describe("when updateNode = Object.move(node, coordinates)", () => {
+    let node: ObjectNode;
+    let coordinates: ObjectCoordinates;
+    let updatedNode: ObjectNode;
+    beforeEach(() => {
+      node = Object.create({
+        name: "Node",
+        type: Utilities.getRandomElement<NodeType>(NodeTypes),
+        coordinates: { x: 0, y: 0 },
+        icon: "./icon.svg",
       });
-      it("then the graph should contain 100000 nodes taking a specific time to load into graph", () => {
-        let graph = Benchmark.Performance(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
-      it("then graph should contain 1000000 nodes using a specific amount of memory", () => {
-        let graph = Benchmark.Memory(() =>
-          simulator.generateNodes(size, node.add)
-        );
-        expect(graph.length).toEqual(size);
-      });
+      coordinates = { x: 1, y: 1 };
+      updatedNode = Object.move(node, coordinates);
+    });
+    it("then updatedNode exist", () => {
+      expect(updatedNode).toBeDefined();
+    });
+    it("then updatedNode.id exist", () => {
+      expect(updatedNode.id).toBeDefined();
+    });
+    it("then updatedNode.name exist", () => {
+      expect(updatedNode.name).toBeDefined();
+    });
+    it("then updatedNode.type exist", () => {
+      expect(updatedNode.type).toBeDefined();
+    });
+    it("then updatedNode.coordinates exist", () => {
+      expect(updatedNode.coordinates).toBeDefined();
+    });
+    it("then updatedNode.icon exist", () => {
+      expect(updatedNode.icon).toBeDefined();
+    });
+    it("then updatedNode.id equals node.id", () => {
+      expect(updatedNode.id).toEqual(node.id);
+    });
+    it("then updatedNode.name equals node.name", () => {
+      expect(updatedNode.name).toEqual(node.name);
+    });
+    it("then updatedNode.type equals node.type", () => {
+      expect(updatedNode.type).toEqual(node.type);
+    });
+    it("then result.coordinates equals coordinates", () => {
+      expect(updatedNode.coordinates).toEqual(coordinates);
+    });
+    it("then result.coordinates is not equal to node.coordinates", () => {
+      expect(updatedNode.coordinates).not.toEqual(node.coordinates);
+    });
+    it("then updatedNode.icon equals node.icon", () => {
+      expect(updatedNode.icon).toEqual(node.icon);
     });
   });
 });
