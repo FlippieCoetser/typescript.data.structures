@@ -88,7 +88,6 @@ function testNodeFindById(size: number, type: Type, detail: Detail) {
       expect(node_to_find.id).toBeDefined();
     });
 
-    //TODO: Reformat the test description 
     it(`then the retrieved node must have the same ID as the node to find, taking up a specific amount of time`, () => {
       let found_node = Benchmark.Performance(() =>
         simulator.findNodeById(nodes, node_to_find.id, node.findById)
@@ -344,6 +343,7 @@ function testNodeDeleteWhere(size: number, type: Type, detail: Detail) {
     let nodes;
     let random_node;
     let nodes_to_delete;
+    let expected_remaining_nodes;
 
     let key: string;
     let value;
@@ -354,7 +354,9 @@ function testNodeDeleteWhere(size: number, type: Type, detail: Detail) {
       nodes = simulator.addNodes(size, node.add);
       random_node = pick_random_node(nodes);
       [key, value] = pick_random_key_value_object(random_node);
-      nodes_to_delete = nodes.filter(node => hasKeyValuePair(node, key, value));
+      //nodes_to_delete = nodes.filter(node => hasKeyValuePair(node, key, value));
+      expected_remaining_nodes = nodes.filter(node => !hasKeyValuePair(node, key, value));
+      
     });
     it(`then all the nodes matching the condition should be removed, taking up a specific amount of time`, () => {
       let deleted_nodes = Benchmark.Performance(() =>
@@ -362,9 +364,10 @@ function testNodeDeleteWhere(size: number, type: Type, detail: Detail) {
       );
 
       // Find all the nodes that match K=V, if any appear in the deleted_nodes -> Fail
-      for (let node of nodes_to_delete) {
-        expect(deleted_nodes).not.toContain(node);
-      }
+      // for (let node of nodes_to_delete) {
+      //   expect(deleted_nodes).not.toContain(node);
+      // }
+      expect(deleted_nodes).toEqual(expected_remaining_nodes);
 
       // deleted_nodes should contain all the nodes that do not match K=V
     });
@@ -374,9 +377,10 @@ function testNodeDeleteWhere(size: number, type: Type, detail: Detail) {
         simulator.deleteNodesWhere(nodes, key, value, node.deleteWhere)
       );
       // Find all the nodes that match K=V, if any appear in the deleted_nodes -> Fail
-      for (let node of nodes_to_delete) {
-        expect(deleted_nodes).not.toContain(node);
-      }
+      // for (let node of nodes_to_delete) {
+      //   expect(deleted_nodes).not.toContain(node);
+      // }
+      expect(deleted_nodes).toEqual(expected_remaining_nodes);
     });
   });
 }
@@ -451,5 +455,5 @@ function executeObjectTestSuite(detail: Detail) {
 
 describe("Given Object Data Structure is used", () => {
   executeObjectTestSuite("small");
-  //executeObjectTestSuite("large");
+  executeObjectTestSuite("large");
 });

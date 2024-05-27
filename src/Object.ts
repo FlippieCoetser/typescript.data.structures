@@ -1,5 +1,3 @@
-import { increment_tuple_x_coordinate } from "./Tuple";
-
 type ID = string;
 type Name = string;
 type Incoming = string | string[];
@@ -34,47 +32,42 @@ export type LargeObject = {
   ui: UI;
 };
 
-type NodeObject = MinObject | LargeObject;
+const isObject = (data) => data && typeof data === 'object' && !Array.isArray(data);
 
-
-
-/**
- * An object can be small or large. If an object is large, it will have nested objects with nested properties. 
- * To filter a graph of nodes by a key-value pair, we need to traverse the graph and check if the key-value pair exists in the graph.
- */
-// export const hasKeyValuePair = (obj, key: string, value) => {
-//   if (obj.hasOwnProperty(key) && obj[key] === value) {
-//     return true;
-//   }
-//   for (let i in obj) {
-//     if (typeof obj[i] === 'object') {
-//       if (hasKeyValuePair(obj[i], key, value)) {
-//         return true;
-//       }
-//     }
-//   }
-//   return false;
-// }
-
-export function hasKeyValuePair (obj, key: string, value) {
-  if (Array.isArray(obj[key]) && obj[key].includes(value)) {
+export const hasKeyValuePair = (object, targetKey, targetValue) => {
+  // Check if the current object contains the key-value pair
+  if (object.hasOwnProperty(targetKey) && object[targetKey] === targetValue) {
     return true;
   }
 
-  if (obj[key] === value) {
-    return true;
-  }
-
-  for (let i in obj) {
-    if (typeof obj[i] === 'object') {
-      if (hasKeyValuePair(obj[i], key, value)) {
-        return true;
+  // Recurse through all properties of the object
+  for (const key in object) {
+    if (object.hasOwnProperty(key)) {
+      const value = object[key];
+      
+      // If the value is an object, recurse into it
+      if (isObject(value)) {
+        if (hasKeyValuePair(value, targetKey, targetValue)) {
+          return true;
+        }
+      }
+      
+      // If the value is an array, recurse into each item
+      if (Array.isArray(value)) {
+        for (const item of value) {
+          if (isObject(item) || Array.isArray(item)) {
+            if (hasKeyValuePair(item, targetKey, targetValue)) {
+              return true;
+            }
+          }
+        }
       }
     }
   }
 
+  // Return false if the key-value pair is not found
   return false;
-}
+};
 
 export const increment_object_x_coordinate = (object: LargeObject, amount: number = 5) => {
   return {
@@ -89,6 +82,10 @@ export const increment_object_x_coordinate = (object: LargeObject, amount: numbe
   };
 }
 
+export const chooseRandomIconValue = () => {
+  const icons = Array.from({length: 10}, (_, i) => `icon-${i}`);
+  return icons[Math.floor(Math.random() * icons.length)];
+}
 
 export const object = {
   small: {
@@ -97,7 +94,7 @@ export const object = {
       name: `node`,
       x: Math.random() * 10,
       y: Math.random() * 10,
-      icon: "icon",
+      icon: chooseRandomIconValue(),
     }) as MinObject,
 
     findAll: (nodes: MinObject[]) => nodes,
@@ -132,7 +129,7 @@ export const object = {
           x: Math.random() * 10,
           y: Math.random() * 10,
         },
-        icon: "icon",
+        icon: chooseRandomIconValue(),
       },
     }) as LargeObject,
 
@@ -140,7 +137,7 @@ export const object = {
     findById: (nodes: LargeObject[], id: string) => nodes.find(node => node.id === id),
     findWhere: (nodes: LargeObject[], key: string, value) => nodes.filter(node => hasKeyValuePair(node, key, value)),
 
-    updateAll: (nodes) => nodes.map(increment_object_x_coordinate),
+    updateAll: (nodes) => nodes.map(node => increment_object_x_coordinate(node)),
     updateById: (nodes: LargeObject[], id: string) => nodes.map(node => node.id !== id ? node : increment_object_x_coordinate(node)),
     updateWhere: (nodes: LargeObject[], key: string, value) =>
       nodes.map(node => hasKeyValuePair(node, key, value) ? increment_object_x_coordinate(node) : node),
