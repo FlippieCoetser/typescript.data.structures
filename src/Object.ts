@@ -16,7 +16,7 @@ export type ObjectNode = {
   metadata?: Metadata[];
 };
 
-export type ConnectionCoordinates = {
+export type ObjectConnectionCoordinates = {
   start: ObjectCoordinates;
   end: ObjectCoordinates;
 };
@@ -26,7 +26,7 @@ export type ObjectConnection = {
   name: string;
   source: UUID;
   target: UUID;
-  coordinates: ConnectionCoordinates;
+  coordinates: ObjectConnectionCoordinates;
 };
 
 export type ObjectPathway = {
