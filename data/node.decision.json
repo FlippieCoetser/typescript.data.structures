@@ -1,0 +1,22 @@
+{
+  "id": "5a3e4a90-b266-4be3-b04d-abb627d78749",
+  "name": "ACS",
+  "type": "decision",
+  "coordinates": { "x": 200, "y": 400 },
+  "direction": "Diverging",
+  "icon": "icon.svg",
+  "metadata": [
+    {
+      "prevalence": [
+        {
+          "target": "46b589ed-a2d8-462a-99f5-ad2d82ed44fb",
+          "probability": 0.84
+        },
+        {
+          "target": "ddacb2ed-231b-4987-aa83-f6af6ee44b02",
+          "probability": 0.16
+        }
+      ]
+    }
+  ]
+}

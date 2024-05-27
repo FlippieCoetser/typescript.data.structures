@@ -3,14 +3,12 @@ const path = require("path");
 module.exports = function (config) {
   config.set({
     frameworks: ["jasmine"],
-    client: {
-      jasmine: {
-        random: false,
-        timeoutInterval: 300000,
-      },
+    proxies: {
+      "/src/": "/base/src/",
+      "/test/": "/base/test/",
     },
-
     files: [
+      { pattern: "./importmap.js" },
       { pattern: "./src/**/*.js", type: "module" },
       { pattern: "./test/**/*.js", type: "module" },
 
@@ -55,7 +53,6 @@ module.exports = function (config) {
     browserDisconnectTolerance: 3, // Increase the disconnect tolerance
     captureTimeout: 300000, // Increase the capture timeout
     singleRun: true,
-    logLevel: config.DISABLE,
-
+    logLevel: config.LOG_DISABLED,
   });
 };
