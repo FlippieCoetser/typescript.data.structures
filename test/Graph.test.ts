@@ -699,5 +699,21 @@ describe("Given graph = new Graph(Tuple)", () => {
       let results = Benchmark.Memory(meta, graph.addNode, nodes, details);
       expect(results.length).toEqual(2);
     });
+
+    it("then adding 1 node to an existing set of 10 nodes takes", () => {
+      let nodes = graph.createNodes(10, details);
+      nodes = structuredClone(nodes);
+      let meta = { structure: "Object", action: "addNode", after: 10 };
+      let results = Benchmark.Performance(meta, graph.addNode, nodes, details);
+      expect(results.length).toEqual(1 + 10);
+    });
+    it("then adding 1 node to an existing set of 10 nodes consumes", () => {
+      let nodes = graph.createNodes(10, details);
+      nodes = structuredClone(nodes);
+      let meta = { structure: "Object", action: "addNode", after: 10 };
+      let results = Benchmark.Memory(meta, graph.addNode, nodes, details);
+      expect(results.length).toEqual(1 + 10);
+    });
+
   });
 });
