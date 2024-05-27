@@ -4,6 +4,8 @@
  */
 
 
+
+
 // no nesting
 
 let oneMeta = ['id', 'name', 'age'];
@@ -14,14 +16,14 @@ let one = [1, 'John', 25];
 let twoMeta = ['id', 'name', 'age', ['address', 'city', 'zip']];
 let two = [1, 'John', 25, ['123 Main St', 'Springfield', 62704]];
 
+let threeMeta = ['id', 'name', 'age', ['address', 'city', 'zip', ['lat', 'lon']]];
+let three = [1, 'John', 25, ['123 Main St', 'Springfield', 62704, [39.78373, -100.445882]]];
+
 // two levels of nesting
-
-
-
-let isArray = (data) => Array.isArray(data) 
+const isArray = (data) => Array.isArray(data) 
 
 // Find the indexes where the element at level zero is an array
-const findIndexesOfArraysInArray = (keys) => keys.map((k, i) => {
+const findIndexesOfArraysInArray = (keys) => !isArray(keys) ? -1 : keys.map((k, i) => {
     if (isArray(k)) {
         return i;
     }
@@ -85,13 +87,7 @@ let useTwoIndex = (data, index) => {
 };
 // Searching for key `lat` and the result should be an array, and the array [3, 3, 0]
 // 
-let threeMeta = [
-    'id', 'name', 'age', //
-    ['address', 'city', 'zip', ['lat', 'long']]
-];
-let three = [1, 'John', 25, ['123 Main St', 'Springfield', 62704, [39.78373, -89.650148]]];
 
-const lat_raw = threeMeta[3][3][1]
 
 let findThreeIndex = (keys, key) => {
 
@@ -173,7 +169,7 @@ let useThreeIndex = (data, index) => {
 
 
 
-let findNthLevelIndex = (keys, key) => {
+let findNthLevelIndex_original = (keys, key) => {
     // Check if the key was found in the zero-th level
     let flat_0_index = keys.indexOf(key)
     let key_found_flat_0_index = flat_0_index !== -1;
@@ -201,9 +197,70 @@ let findNthLevelIndex = (keys, key) => {
                 return [flat_n_current_array_index, flat_n_current_array_key_index]
             }
             else {
-                return [flat_n_current_array_index, ...findNthLevelIndex(flat_n_current_array, key)]
+                return [flat_n_current_array_index, ...findNthLevelIndex_original(flat_n_current_array, key)]
             }
             
         }
+        return -1;
     }
 }
+
+
+let load_index_path = (result, indexes) => {
+    if (result !== -1) {
+        return [indexes, ...(isArray(result) ? result : [result])];
+    }
+} 
+
+let check_nested_array_indexes = (nested_arrays_indexes, keys, key) => {
+    for (let i = 0; i < nested_arrays_indexes.length; i++) {
+        const current_array_index = nested_arrays_indexes[i];
+        const current_array = keys[current_array_index];
+
+        // Recursively check the nested array
+        const result = findNthLeveLIndex(current_array, key);
+        //load_index_path(result, current_array_index);
+
+        let key_found = result !== -1;
+        if (key_found) {
+            return [current_array_index, ...(isArray(result) ? result : [result])];
+        }
+        
+    }
+    // If the key is not found at any level, return -1
+    return -1;
+}
+
+let findNthLeveLIndex = (keys, key) => {
+    // Base case: We are on the 0th level of the array. Check here first.
+    const base_key_index = keys.indexOf(key);
+    if (base_key_index !== -1) return base_key_index;
+
+    // Recursive case: Check deeper levels.
+    let nested_arrays_indexes = findIndexesOfArraysInArray(keys);
+
+    // TODO: Refactor to use a higher order function (map or forEach)
+    return check_nested_array_indexes(nested_arrays_indexes, keys, key);
+};
+
+
+let useNthLevelIndex = (data, index) => {
+    // index is either a number or an array of numbers
+    if (typeof index === "number") {
+        return getValueByIndex(data, index);
+    }
+    let curr_value = getValueByIndex(data, index[0]);
+    for (let i = 1; i < index.length; i++){
+        curr_value = getValueByIndex(curr_value, index[i]);
+    }
+    return curr_value;
+}
+
+export {
+    isArray,
+    findIndexesOfArraysInArray,
+    getValueByIndex,
+    findNthLeveLIndex,
+    useNthLevelIndex
+}
+

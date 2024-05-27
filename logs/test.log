@@ -1,0 +1,528 @@
+
+> @browser-modules/typescript.data.structures@1.0.24 pretest
+> npm run build.test
+
+
+> @browser-modules/typescript.data.structures@1.0.24 build.test
+> npm run clean.test && tsc -p build.test.json
+
+
+> @browser-modules/typescript.data.structures@1.0.24 clean.test
+> node ./tasks/clean.test.mjs
+
+
+> @browser-modules/typescript.data.structures@1.0.24 test
+> karma start
+
+[32m21 05 2024 08:42:15.945:INFO [karma-server]: [39mKarma v6.4.3 server started at http://localhost:9879/
+[32m21 05 2024 08:42:15.950:INFO [launcher]: [39mLaunching browsers Chrome_with_memory with concurrency unlimited
+[32m21 05 2024 08:42:15.971:INFO [launcher]: [39mStarting browser Chrome
+[32m21 05 2024 08:42:18.560:INFO [Chrome 124.0.0.0 (Linux x86_64)]: [39mConnected on socket 3XpjQ_jB4xNShRyPAAAB with id 44586812
+
+  Given Calculator imported
+    when Calculator.Divide(2,2)
+      [32m✓ [39mthen 1 should be returned
+    [32m✓ [39mthen Calculator should exist
+    when Calculator.Add(1, 2)
+      [32m✓ [39mthen 3 should be returned
+    when Calculator.Subtract(2,1)
+      [32m✓ [39mthen 1 should be returned
+    when Calculator.Multiply(2,2)
+      [32m✓ [39mthen 4 should be returned
+
+  Given GraphNode is imported
+    Given the new GraphNode called node is instantiated
+      [32m✓ [39mthen node should contain a method called updateById
+      [32m✓ [39mthen node should contain a method called deleteWhere
+      [32m✓ [39mthen node should contain a method called deleteById
+      [32m✓ [39mthen node should contain a method called add
+      [32m✓ [39mthen node should contain a method called updateAll
+      [32m✓ [39mthen node should contain a method called deleteAll
+      when node.updateAll() is called
+        [32m✓ [39mthen all the nodes should contain a property x with value incremented by 5
+        [32m✓ [39mthen all the nodes should contain a property icon
+        [32m✓ [39mthen all the nodes should contain a property y
+        [32m✓ [39mthen all the nodes should contain a property name
+        [32m✓ [39mthen all the nodes should contain a property x
+        [32m✓ [39mthen return an array of all the updated node Objects
+        [32m✓ [39mthen all the nodes should contain a property id
+      [32m✓ [39mthen node should contain a method called findById
+      when node.findWhere() is called
+        [32m✓ [39mthen all the nodes should contain a property icon
+        [32m✓ [39mthen all the nodes should contain a property name with value Start
+        [32m✓ [39mthen all the nodes should contain a property x
+        [32m✓ [39mthen all the nodes should contain a property y
+        [32m✓ [39mthen all the nodes should contain a property id
+        [32m✓ [39mthen all the nodes should contain a property name
+        [32m✓ [39mthen return the array of found node objects matching the condition
+      when node.updateWhere() is called
+        [32m✓ [39mthen all the nodes should contain a property icon
+        [32m✓ [39mthen all the nodes should contain a property x with value incremented by 5
+        [32m✓ [39mthen all the nodes should contain a property x
+        [32m✓ [39mthen all the nodes should contain a property name
+        [32m✓ [39mthen all the nodes should contain a property y
+        [32m✓ [39mthen all the nodes should contain a property id
+        [32m✓ [39mthen return the array of updated node objects matching the condition
+      [32m✓ [39mthen node should contain a method called findAll
+      when node.add() is called
+        [32m✓ [39mthen the node should contain a property name
+        [32m✓ [39mthen the node should contain a property id
+        [32m✓ [39mthen the node should contain a property x
+        [32m✓ [39mthen the node should contain a property y
+        [32m✓ [39mthen the node should contain a property icon
+        [32m✓ [39mthen a node of type object is returned
+      [32m✓ [39mthen node should contains property type with value object
+      when node.findById() is called
+        [32m✓ [39mthen return the node Object with the id
+        [32m✓ [39mthen the node should contain a property id
+        [32m✓ [39mthen the node should contain a property x
+        [32m✓ [39mthen the node should contain a property icon
+        [32m✓ [39mthen the node should contain a property name
+        [32m✓ [39mthen the node should contain a property y
+        [32m✓ [39mthen the node should contain a property id with value
+      when node.findAll() is called
+        [32m✓ [39mthen all the nodes should contain a property y
+        [32m✓ [39mthen all the nodes should contain a property x
+        [32m✓ [39mthen all the nodes should contain a property icon
+        [32m✓ [39mthen return an array of all the found node Objects
+        [32m✓ [39mthen all the nodes should contain a property name
+        [32m✓ [39mthen all the nodes should contain a property id
+      [32m✓ [39mthen node should contain a method called findWhere
+      when node.deleteWhere() is called
+        [32m✓ [39mthen return the array of deleted node objects matching the condition
+        [32m✓ [39mthen the array of deleted nodes should not contain the node with the name Start
+      [32m✓ [39mthen node should contain a method called updateWhere
+      [32m✓ [39mthen node should contains private property type
+      [32m✓ [39mthen node exist
+      when node.updateById() is called
+        [32m✓ [39mthen the nodes should contain a property x with value incremented by 5
+        [32m✓ [39mthen the nodes should contain a property icon
+        [32m✓ [39mthen the nodes should contain a property y
+        [32m✓ [39mthen the nodes should contain a property x
+        [32m✓ [39mthen the nodes should contain a property name
+        [32m✓ [39mthen the nodes should contain a property id
+        [32m✓ [39mthen return the array of updated node Objects with the id
+      when node.deleteById() is called
+        [32m✓ [39mthen the array of deleted nodes should not contain the node with the id
+        [32m✓ [39mthen return an array of all the deleted node Objects
+      when node.deleteAll() is called
+        [32m✓ [39mthen the array of deleted nodes should be empty
+        [32m✓ [39mthen return an array of all the deleted node Objects
+    [32m✓ [39mthen GraphNode should be defined
+
+  Given Object Data Structure is used
+    and the Data Structure is small
+      when deleting a node by id in a graph of 1000000 nodes
+        [32m✓ [39mthen graph should contain 999999 nodes, using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 999999 nodes, taking a specific time to delete the node
+      when adding 10000 new nodes
+        [32m✓ [39mthen graph should contain 10000 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 10000 nodes taking a specific time to load into graph
+      when finding a node by id in a graph of 100 nodes
+        [32m✓ [39mthen the node Object to find must contain a property id
+        [32m✓ [39mthen the node Object to find must exist
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, taking up a specific amount of time
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, using a specific amount of memory
+      when finding all nodes in a graph of 100 nodes
+        [32m✓ [39mthen graph should contain 100 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 100 nodes taking a specific time to be retrieved from the graph
+      when finding a node by id in a graph of 10 nodes
+        [32m✓ [39mthen the node Object to find must contain a property id
+        [32m✓ [39mthen the node Object to find must exist
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, taking up a specific amount of time
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, using a specific amount of memory
+      when deleting nodes in a graph of 1 nodes on the condition where KEY=VALUE 
+        [32m✓ [39mthen all the nodes matching the condition should be removed, taking up a specific amount of time
+        [32m✓ [39mthen all the nodes matching the condition should be removed, using a specific amount of memory
+      when adding 1000 new nodes
+        [32m✓ [39mthen graph should contain 1000 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 1000 nodes taking a specific time to load into graph
+      when updating all nodes in a graph of 1000000 nodes
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, taking a specific time
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, using a specific amount of memory
+      when finding a node by id in a graph of 10000 nodes
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, using a specific amount of memory
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, taking up a specific amount of time
+        [32m✓ [39mthen the node Object to find must contain a property id
+        [32m✓ [39mthen the node Object to find must exist
+      when deleting nodes in a graph of 1000000 nodes on the condition where KEY=VALUE 
+        [32m✓ [39mthen all the nodes matching the condition should be removed, taking up a specific amount of time
+      when deleting a node by id in a graph of 100 nodes
+        [32m✓ [39mthen the graph should contain 99 nodes, taking a specific time to delete the node
+        [32m✓ [39mthen graph should contain 99 nodes, using a specific amount of memory
+      when adding 100000 new nodes
+        [32m✓ [39mthen graph should contain 100000 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 100000 nodes taking a specific time to load into graph
+      when deleting all nodes in a graph of 1000 nodes
+        [32m✓ [39mthen graph should contain 0 nodes, using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 0 nodes, taking a specific time to delete all nodes
+      when deleting nodes in a graph of 1000 nodes on the condition where KEY=VALUE 
+        [32m✓ [39mthen all the nodes matching the condition should be removed, using a specific amount of memory
+        [32m✓ [39mthen all the nodes matching the condition should be removed, taking up a specific amount of time
+      when finding a node by id in a graph of 100000 nodes
+        [32m✓ [39mthen the node Object to find must exist
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, taking up a specific amount of time
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, using a specific amount of memory
+        [32m✓ [39mthen the node Object to find must contain a property id
+      when updating all nodes in a graph of 10000 nodes
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, taking a specific time
+      when finding a node by id in a graph of 1000000 nodes
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, taking up a specific amount of time
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, using a specific amount of memory
+        [32m✓ [39mthen the node Object to find must exist
+        [32m✓ [39mthen the node Object to find must contain a property id
+      when deleting all nodes in a graph of 10000 nodes
+        [32m✓ [39mthen the graph should contain 0 nodes, taking a specific time to delete all nodes
+        [32m✓ [39mthen graph should contain 0 nodes, using a specific amount of memory
+      when finding all nodes in a graph of 1 nodes
+        [32m✓ [39mthen graph should contain 1 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 1 nodes taking a specific time to be retrieved from the graph
+      when deleting nodes in a graph of 10000 nodes on the condition where KEY=VALUE 
+        [32m✓ [39mthen all the nodes matching the condition should be removed, using a specific amount of memory
+        [32m✓ [39mthen all the nodes matching the condition should be removed, taking up a specific amount of time
+      when updating all nodes in a graph of 100000 nodes
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, taking a specific time
+      when finding all nodes in a graph of 1 on the condition where KEY=VALUE
+        [32m✓ [39mthen all the nodes should match the condition, where key=value, taking up a specific amount of time
+        [32m✓ [39mthen all the nodes match the condition, where key=value, using a specific amount of memory
+      when finding all nodes in a graph of 100000 on the condition where KEY=VALUE
+        [32m✓ [39mthen all the nodes should match the condition, where key=value, taking up a specific amount of time
+        [32m✓ [39mthen all the nodes match the condition, where key=value, using a specific amount of memory
+      when deleting a node by id in a graph of 10000 nodes
+        [32m✓ [39mthen the graph should contain 9999 nodes, taking a specific time to delete the node
+        [32m✓ [39mthen graph should contain 9999 nodes, using a specific amount of memory
+      when updating a node by id in a graph of 1000 nodes
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, taking up a specific amount of time
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, using a specific amount of memory
+      when deleting a node by id in a graph of 100000 nodes
+        [32m✓ [39mthen graph should contain 99999 nodes, using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 99999 nodes, taking a specific time to delete the node
+      when finding all nodes in a graph of 10 nodes
+        [32m✓ [39mthen graph should contain 10 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 10 nodes taking a specific time to be retrieved from the graph
+      when updating all nodes in a graph of 1000 nodes
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, taking a specific time
+      when updating a node by id in a graph of 100 nodes
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, taking up a specific amount of time
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, using a specific amount of memory
+      when finding all nodes in a graph of 1000 on the condition where KEY=VALUE
+        [32m✓ [39mthen all the nodes match the condition, where key=value, using a specific amount of memory
+        [32m✓ [39mthen all the nodes should match the condition, where key=value, taking up a specific amount of time
+      when updating nodes in a graph of 1000 on the condition where KEY=VALUE
+        [32m✓ [39mthen all the nodes to update should have their x coordinate incremented by 5, taking up a specific amount of time
+        [32m✓ [39mthen all the matching nodes should have their x coordinate incremented by 5, using a specific amount of memory
+      when finding all nodes in a graph of 10000 on the condition where KEY=VALUE
+        [32m✓ [39mthen all the nodes should match the condition, where key=value, taking up a specific amount of time
+        [32m✓ [39mthen all the nodes match the condition, where key=value, using a specific amount of memory
+      when deleting a node by id in a graph of 10 nodes
+        [32m✓ [39mthen graph should contain 9 nodes, using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 9 nodes, taking a specific time to delete the node
+      when adding 100 new nodes
+        [32m✓ [39mthen the graph should contain 100 nodes taking a specific time to load into graph
+        [32m✓ [39mthen graph should contain 100 nodes using a specific amount of memory
+      when deleting all nodes in a graph of 1 nodes
+        [32m✓ [39mthen graph should contain 0 nodes, using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 0 nodes, taking a specific time to delete all nodes
+      when deleting nodes in a graph of 10 nodes on the condition where KEY=VALUE 
+        [32m✓ [39mthen all the nodes matching the condition should be removed, using a specific amount of memory
+        [32m✓ [39mthen all the nodes matching the condition should be removed, taking up a specific amount of time
+      when finding a node by id in a graph of 1 nodes
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, taking up a specific amount of time
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, using a specific amount of memory
+        [32m✓ [39mthen the node Object to find must exist
+        [32m✓ [39mthen the node Object to find must contain a property id
+      when updating nodes in a graph of 100 on the condition where KEY=VALUE
+        [32m✓ [39mthen all the matching nodes should have their x coordinate incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen all the nodes to update should have their x coordinate incremented by 5, taking up a specific amount of time
+      when deleting all nodes in a graph of 10 nodes
+        [32m✓ [39mthen graph should contain 0 nodes, using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 0 nodes, taking a specific time to delete all nodes
+      when updating a node by id in a graph of 1 nodes
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, taking up a specific amount of time
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, using a specific amount of memory
+      when finding all nodes in a graph of 1000 nodes
+        [32m✓ [39mthen graph should contain 1000 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 1000 nodes taking a specific time to be retrieved from the graph
+      when updating nodes in a graph of 1000000 on the condition where KEY=VALUE
+        [32m✓ [39mthen all the nodes to update should have their x coordinate incremented by 5, taking up a specific amount of time
+        [32m✓ [39mthen all the matching nodes should have their x coordinate incremented by 5, using a specific amount of memory
+      when deleting nodes in a graph of 100 nodes on the condition where KEY=VALUE 
+        [32m✓ [39mthen all the nodes matching the condition should be removed, using a specific amount of memory
+        [32m✓ [39mthen all the nodes matching the condition should be removed, taking up a specific amount of time
+      when updating nodes in a graph of 10 on the condition where KEY=VALUE
+        [32m✓ [39mthen all the matching nodes should have their x coordinate incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen all the nodes to update should have their x coordinate incremented by 5, taking up a specific amount of time
+      when updating all nodes in a graph of 10 nodes
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, taking a specific time
+      when deleting all nodes in a graph of 100 nodes
+        [32m✓ [39mthen the graph should contain 0 nodes, taking a specific time to delete all nodes
+        [32m✓ [39mthen graph should contain 0 nodes, using a specific amount of memory
+      when updating a node by id in a graph of 10 nodes
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, taking up a specific amount of time
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, using a specific amount of memory
+      when finding all nodes in a graph of 100 on the condition where KEY=VALUE
+        [32m✓ [39mthen all the nodes should match the condition, where key=value, taking up a specific amount of time
+        [32m✓ [39mthen all the nodes match the condition, where key=value, using a specific amount of memory
+      when updating all nodes in a graph of 100 nodes
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, taking a specific time
+      when updating nodes in a graph of 100000 on the condition where KEY=VALUE
+        [32m✓ [39mthen all the matching nodes should have their x coordinate incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen all the nodes to update should have their x coordinate incremented by 5, taking up a specific amount of time
+      when finding all nodes in a graph of 1000000 on the condition where KEY=VALUE
+        [32m✓ [39mthen all the nodes should match the condition, where key=value, taking up a specific amount of time
+        [32m✓ [39mthen all the nodes match the condition, where key=value, using a specific amount of memory
+      when finding all nodes in a graph of 100000 nodes
+        [32m✓ [39mthen graph should contain 100000 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 100000 nodes taking a specific time to be retrieved from the graph
+      when updating a node by id in a graph of 1000000 nodes
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, taking up a specific amount of time
+      when deleting a node by id in a graph of 1000 nodes
+        [32m✓ [39mthen the graph should contain 999 nodes, taking a specific time to delete the node
+        [32m✓ [39mthen graph should contain 999 nodes, using a specific amount of memory
+      when updating a node by id in a graph of 10000 nodes
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, taking up a specific amount of time
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, using a specific amount of memory
+      when updating a node by id in a graph of 100000 nodes
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, taking up a specific amount of time
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, using a specific amount of memory
+      when finding all nodes in a graph of 10000 nodes
+        [32m✓ [39mthen graph should contain 10000 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 10000 nodes taking a specific time to be retrieved from the graph
+      when deleting all nodes in a graph of 100000 nodes
+        [32m✓ [39mthen graph should contain 0 nodes, using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 0 nodes, taking a specific time to delete all nodes
+      when updating all nodes in a graph of 1 nodes
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, taking a specific time
+      when adding 10 new nodes
+        [32m✓ [39mthen the graph should contain 10 nodes taking a specific time to load into graph
+        [32m✓ [39mthen graph should contain 10 nodes using a specific amount of memory
+      when deleting all nodes in a graph of 1000000 nodes
+        [32m✓ [39mthen graph should contain 0 nodes, using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 0 nodes, taking a specific time to delete all nodes
+      when finding all nodes in a graph of 1000000 nodes
+        [32m✓ [39mthen graph should contain 1000000 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 1000000 nodes taking a specific time to be retrieved from the graph
+      when adding 1 new nodes
+        [32m✓ [39mthen the graph should contain 1 nodes taking a specific time to load into graph
+        [32m✓ [39mthen graph should contain 1 nodes using a specific amount of memory
+      when deleting a node by id in a graph of 1 nodes
+        [32m✓ [39mthen the graph should contain 0 nodes, taking a specific time to delete the node
+        [32m✓ [39mthen graph should contain 0 nodes, using a specific amount of memory
+      when updating nodes in a graph of 10000 on the condition where KEY=VALUE
+        [32m✓ [39mthen all the matching nodes should have their x coordinate incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen all the nodes to update should have their x coordinate incremented by 5, taking up a specific amount of time
+
+  Given Structure imported
+    When Structure.create is called with useTuple = false
+      [32m✓ [39mthen it should return an object
+    [32m✓ [39mthen Structure should exist
+    Given Structure Exists
+      [32m✓ [39mthen Structure should have create static member
+    When Structure.create is called with useTuple = true
+      [32m✓ [39mthen it should return a tuple
+
+  Given Tuple Data Structure is used
+    and the Data Structure is small
+      when deleting all nodes in a graph of 100 nodes
+        [32m✓ [39mthen graph should contain 0 nodes, using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 0 nodes, taking a specific time to delete all nodes
+      when deleting nodes in a graph of 1000000 nodes on the condition where KEY=VALUE 
+        [32m✓ [39mthen all the nodes matching the condition should be removed, taking up a specific amount of time
+      when updating nodes on the condition KEY=VALUE in a graph of 1000000 nodes
+        [32m✓ [39mthen all the nodes to update should have their x coordinate incremented by 5, taking up a specific amount of time
+      when finding a node by id in a graph of 1000000 nodes
+        [32m✓ [39mthen the node Object to find must exist
+        [32m✓ [39mthen the node Object to find must contain a property id
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, taking up a specific amount of time
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, using a specific amount of memory
+      when adding 100000 new nodes
+        [32m✓ [39mthen the graph should contain 100000 nodes taking a specific time to load into graph
+        [32m✓ [39mthen graph should contain 100000 nodes using a specific amount of memory
+      when deleting nodes in a graph of 100000 nodes on the condition where KEY=VALUE 
+        [32m✓ [39mthen all the nodes matching the condition should be removed, taking up a specific amount of time
+        [32m✓ [39mthen all the nodes matching the condition should be removed, using a specific amount of memory
+      when deleting a node by id in a graph of 1000000 nodes
+        [32m✓ [39mthen the graph should contain 999999 nodes, taking a specific time to delete the node
+        [32m✓ [39mthen graph should contain 999999 nodes, using a specific amount of memory
+      when finding all nodes in a graph of 10000 nodes
+        [32m✓ [39mthen the graph should contain 10000 nodes taking a specific time to be retrieved from the graph
+        [32m✓ [39mthen graph should contain 10000 nodes using a specific amount of memory
+      when updating nodes on the condition KEY=VALUE in a graph of 100000 nodes
+        [32m✓ [39mthen all the nodes to update should have their x coordinate incremented by 5, taking up a specific amount of time
+        [32m✓ [39mthen all the matching nodes should have their x coordinate incremented by 5, using a specific amount of memory
+      when deleting nodes in a graph of 100 nodes on the condition where KEY=VALUE 
+        [32m✓ [39mthen all the nodes matching the condition should be removed, using a specific amount of memory
+        [32m✓ [39mthen all the nodes matching the condition should be removed, taking up a specific amount of time
+      when finding a node by id in a graph of 1 nodes
+        [32m✓ [39mthen all the nodes match the condition, where key=value, using a specific amount of memory
+        [32m✓ [39mthen all the nodes should match the condition, where key=value, taking up a specific amount of time
+      when finding all nodes in a graph of 1000 nodes
+        [32m✓ [39mthen graph should contain 1000 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 1000 nodes taking a specific time to be retrieved from the graph
+      when deleting nodes in a graph of 1000 nodes on the condition where KEY=VALUE 
+        [32m✓ [39mthen all the nodes matching the condition should be removed, taking up a specific amount of time
+        [32m✓ [39mthen all the nodes matching the condition should be removed, using a specific amount of memory
+      when deleting nodes in a graph of 1 nodes on the condition where KEY=VALUE 
+        [32m✓ [39mthen all the nodes matching the condition should be removed, taking up a specific amount of time
+        [32m✓ [39mthen all the nodes matching the condition should be removed, using a specific amount of memory
+      when finding a node by id in a graph of 10000 nodes
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, taking up a specific amount of time
+        [32m✓ [39mthen the node Object to find must exist
+        [32m✓ [39mthen the node Object to find must contain a property id
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, using a specific amount of memory
+      when updating all nodes in a graph of 1 nodes
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, taking a specific time
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, using a specific amount of memory
+      when finding all nodes in a graph of 100 nodes
+        [32m✓ [39mthen the graph should contain 100 nodes taking a specific time to be retrieved from the graph
+        [32m✓ [39mthen graph should contain 100 nodes using a specific amount of memory
+      when deleting a node by id in a graph of 10000 nodes
+        [32m✓ [39mthen the graph should contain 9999 nodes, taking a specific time to delete the node
+        [32m✓ [39mthen graph should contain 9999 nodes, using a specific amount of memory
+      when deleting all nodes in a graph of 10 nodes
+        [32m✓ [39mthen graph should contain 0 nodes, using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 0 nodes, taking a specific time to delete all nodes
+      when adding 100 new nodes
+        [32m✓ [39mthen graph should contain 100 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 100 nodes taking a specific time to load into graph
+      when updating all nodes in a graph of 1000000 nodes
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, taking a specific time
+      when finding a node by id in a graph of 100000 nodes
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, using a specific amount of memory
+        [32m✓ [39mthen the node Object to find must exist
+        [32m✓ [39mthen the node Object to find must contain a property id
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, taking up a specific amount of time
+      when updating all nodes in a graph of 10 nodes
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, taking a specific time
+      when finding all nodes in a graph of 10 nodes
+        [32m✓ [39mthen graph should contain 10 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 10 nodes taking a specific time to be retrieved from the graph
+      when deleting all nodes in a graph of 1 nodes
+        [32m✓ [39mthen graph should contain 0 nodes, using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 0 nodes, taking a specific time to delete all nodes
+      when updating a node by id in a graph of 1 nodes
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, taking up a specific amount of time
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, using a specific amount of memory
+      when deleting nodes in a graph of 10 nodes on the condition where KEY=VALUE 
+        [32m✓ [39mthen all the nodes matching the condition should be removed, using a specific amount of memory
+        [32m✓ [39mthen all the nodes matching the condition should be removed, taking up a specific amount of time
+      when updating all nodes in a graph of 100 nodes
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, taking a specific time
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, using a specific amount of memory
+      when updating nodes on the condition KEY=VALUE in a graph of 1000 nodes
+        [32m✓ [39mthen all the nodes to update should have their x coordinate incremented by 5, taking up a specific amount of time
+        [32m✓ [39mthen all the matching nodes should have their x coordinate incremented by 5, using a specific amount of memory
+      when updating a node by id in a graph of 10 nodes
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, taking up a specific amount of time
+      when updating a node by id in a graph of 100 nodes
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, taking up a specific amount of time
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, using a specific amount of memory
+      when updating all nodes in a graph of 1000 nodes
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen all the nodes should have their x value incremented by 5, taking a specific time
+      when updating nodes on the condition KEY=VALUE in a graph of 10000 nodes
+        [32m✓ [39mthen all the matching nodes should have their x coordinate incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen all the nodes to update should have their x coordinate incremented by 5, taking up a specific amount of time
+      when finding a node by id in a graph of 1000 nodes
+        [32m✓ [39mthen all the nodes should match the condition, where key=value, taking up a specific amount of time
+        [32m✓ [39mthen all the nodes match the condition, where key=value, using a specific amount of memory
+      when finding a node by id in a graph of 10 nodes
+        [32m✓ [39mthen all the nodes should match the condition, where key=value, taking up a specific amount of time
+        [32m✓ [39mthen all the nodes match the condition, where key=value, using a specific amount of memory
+      when updating nodes on the condition KEY=VALUE in a graph of 1 nodes
+        [32m✓ [39mthen all the matching nodes should have their x coordinate incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen all the nodes to update should have their x coordinate incremented by 5, taking up a specific amount of time
+      when finding all nodes in a graph of 1000000 nodes
+        [32m✓ [39mthen graph should contain 1000000 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 1000000 nodes taking a specific time to be retrieved from the graph
+      when finding a node by id in a graph of 10000 nodes
+        [32m✓ [39mthen all the nodes should match the condition, where key=value, taking up a specific amount of time
+        [32m✓ [39mthen all the nodes match the condition, where key=value, using a specific amount of memory
+      when finding a node by id in a graph of 100 nodes
+        [32m✓ [39mthen all the nodes match the condition, where key=value, using a specific amount of memory
+        [32m✓ [39mthen all the nodes should match the condition, where key=value, taking up a specific amount of time
+      when finding all nodes in a graph of 100000 nodes
+        [32m✓ [39mthen graph should contain 100000 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 100000 nodes taking a specific time to be retrieved from the graph
+      when updating nodes on the condition KEY=VALUE in a graph of 10 nodes
+        [32m✓ [39mthen all the nodes to update should have their x coordinate incremented by 5, taking up a specific amount of time
+        [32m✓ [39mthen all the matching nodes should have their x coordinate incremented by 5, using a specific amount of memory
+      when updating nodes on the condition KEY=VALUE in a graph of 100 nodes
+        [32m✓ [39mthen all the matching nodes should have their x coordinate incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen all the nodes to update should have their x coordinate incremented by 5, taking up a specific amount of time
+      when finding a node by id in a graph of 100000 nodes
+        [32m✓ [39mthen all the nodes match the condition, where key=value, using a specific amount of memory
+        [32m✓ [39mthen all the nodes should match the condition, where key=value, taking up a specific amount of time
+      when adding 10 new nodes
+        [32m✓ [39mthen graph should contain 10 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 10 nodes taking a specific time to load into graph
+      when finding a node by id in a graph of 1000000 nodes
+        [32m✓ [39mthen all the nodes should match the condition, where key=value, taking up a specific amount of time
+        [32m✓ [39mthen all the nodes match the condition, where key=value, using a specific amount of memory
+      when finding a node by id in a graph of 100 nodes
+        [32m✓ [39mthen the node Object to find must exist
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, using a specific amount of memory
+        [32m✓ [39mthen the node Object to find must contain a property id
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, taking up a specific amount of time
+      when adding 1000000 new nodes
+        [32m✓ [39mthen the graph should contain 1000000 nodes taking a specific time to load into graph
+        [32m✓ [39mthen graph should contain 1000000 nodes using a specific amount of memory
+      when updating a node by id in a graph of 1000 nodes
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, using a specific amount of memory
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, taking up a specific amount of time
+      when deleting all nodes in a graph of 100000 nodes
+        [32m✓ [39mthen graph should contain 0 nodes, using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 0 nodes, taking a specific time to delete all nodes
+      when updating a node by id in a graph of 10000 nodes
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, taking up a specific amount of time
+        [32m✓ [39mthen the node to update must have it's x coordinate incremented by 5, using a specific amount of memory
+      when finding a node by id in a graph of 1000 nodes
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, using a specific amount of memory
+        [32m✓ [39mthen the node Object to find must exist
+        [32m✓ [39mthen the node Object to find must contain a property id
+        [32m✓ [39mthen the retrieved node must have the same ID as the node to find, taking up a specific amount of time
+      when deleting all nodes in a graph of 1000 nodes
+        [32m✓ [39mthen graph should contain 0 nodes, using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 0 nodes, taking a specific time to delete all nodes
+      when adding 1000 new nodes
+        [32m✓ [39mthen graph should contain 1000 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 1000 nodes taking a specific time to load into graph
+      when adding 1 new nodes
+        [32m✓ [39mthen graph should contain 1 nodes using a specific amount of memory
+        [32m✓ [39mthen the graph should contain 1 nodes taking a specific time to load into graph
+
+Chrome 124.0.0.0 (Linux x86_64): Executed 333 of 384[32m SUCCESS[39m (2 mins 30.574 secs / 1 min 39.615 secs)
+[32mTOTAL: 333 SUCCESS[39m
+
+TOTAL: 333 SUCCESS
+----------------|---------|----------|---------|---------|----------------------
+File            | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s    
+----------------|---------|----------|---------|---------|----------------------
+All files       |   57.67 |    42.39 |   58.03 |   58.86 |                      
+ Calculator.ts  |     100 |      100 |     100 |     100 |                      
+ GraphNode.ts   |     100 |      100 |     100 |     100 |                      
+ Object.ts      |   55.56 |    47.37 |   51.43 |   56.25 | 61,70-71,80,117-150  
+ Simulator.ts   |     100 |      100 |     100 |     100 |                      
+ Structure.ts   |     100 |      100 |     100 |     100 |                      
+ Tuple.ts       |   44.62 |    36.36 |   48.72 |    44.9 | ...-83,89-91,121-144 
+ map.example.ts |     100 |      100 |     100 |     100 |                      
+ map.parser.ts  |       4 |        0 |       0 |    5.56 | 647-913              
+----------------|---------|----------|---------|---------|----------------------
+
+> @browser-modules/typescript.data.structures@1.0.24 posttest
+> npm run clean.test
+
+
+> @browser-modules/typescript.data.structures@1.0.24 clean.test
+> node ./tasks/clean.test.mjs
+

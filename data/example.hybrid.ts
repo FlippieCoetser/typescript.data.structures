@@ -49,12 +49,58 @@ let smallFlatTuple = [
  * Nested Standard tuple
  */
 let largeNestedTuple = [
-  "15b6679a-fd9d-4036-b1ab-af0b932fc903",
-  "Triage",
-  "d5bc89b2-74ea-4d1a-a0ed-22f4de79a580",
-  "d4ae89b2-74ea-4d1a-a0ed-22f4de79a580",
+  "15b6679a-fd9d-4036-b1ab-af0b932fc903",  // 0
+  "Triage", // 1
+  "d5bc89b2-74ea-4d1a-a0ed-22f4de79a580", // 2
+  "d4ae89b2-74ea-4d1a-a0ed-22f4de79a580", // 3
   [[[["log normal"], [0.1640238, 0.4169375]]]],
   [[0, 0], "icon"],
+];
+
+largeNestedTuple = [
+  "15b6679a-fd9d-4036-b1ab-af0b932fc903",  // 0
+  "Triage", // 1
+  "d5bc89b2-74ea-4d1a-a0ed-22f4de79a580", // 2
+  "d4ae89b2-74ea-4d1a-a0ed-22f4de79a580", // 3
+  [ // 4
+    [ // [4][0]
+      [ // [4][0]
+        ["log normal"], // [4][0][0]
+        [0.1640238, 0.4169375] // [4][0][1]
+      ]
+    ]
+  ],
+  [ // 5
+    [0, 0], // [5][0]
+    "icon" // [5][1]
+  ],
+];
+
+let largeNestedTupleKeys = [
+  "id",
+  "name",
+  "incoming",
+  "outgoing",
+  [
+    [
+      //"duration",
+      [
+        //"distribution",
+        [
+          "meanlog",
+          "sdlog"
+        ]
+      ]
+    ]
+  ],
+  [
+    //"coordinates",
+    [
+      "x",
+      "y"
+    ],
+    "icon"
+  ]
 ];
 
 /*

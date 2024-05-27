@@ -3,7 +3,7 @@ import { Simulator } from "../src/Simulator.js";
 
 // import { nodes } from "../data/Nodes.js";
 
-import { pick_random_node } from "./Utils.js";
+import { pick_random_node } from "./Test.Utils.js";
 
 /**
  * All tests covering the usage on any operation method will have 1000 nodes populated in the graph / nodes array.

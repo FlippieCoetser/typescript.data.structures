@@ -17,4 +17,6 @@ export class Simulator {
   deleteNodeById = (nodes, id: string, deleteNodeByIDMethod: Function): Node[] => deleteNodeByIDMethod(nodes, id);
   deleteNodesWhere = (nodes, key: string, value, deleteNodesWhereMethod: Function): Node[] => 
     deleteNodesWhereMethod(nodes, key, value);
+
+  bruh = (nodes: Node[], method: Function) => method(nodes as number[]);
 }

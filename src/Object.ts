@@ -1,3 +1,9 @@
+
+import { 
+  chooseRandomIconValue, 
+  hasKeyValuePair 
+} from "./Utils.js";
+
 type ID = string;
 type Name = string;
 type Incoming = string | string[];
@@ -32,42 +38,7 @@ export type LargeObject = {
   ui: UI;
 };
 
-const isObject = (data) => data && typeof data === 'object' && !Array.isArray(data);
 
-export const hasKeyValuePair = (object, targetKey, targetValue) => {
-  // Check if the current object contains the key-value pair
-  if (object.hasOwnProperty(targetKey) && object[targetKey] === targetValue) {
-    return true;
-  }
-
-  // Recurse through all properties of the object
-  for (const key in object) {
-    if (object.hasOwnProperty(key)) {
-      const value = object[key];
-      
-      // If the value is an object, recurse into it
-      if (isObject(value)) {
-        if (hasKeyValuePair(value, targetKey, targetValue)) {
-          return true;
-        }
-      }
-      
-      // If the value is an array, recurse into each item
-      if (Array.isArray(value)) {
-        for (const item of value) {
-          if (isObject(item) || Array.isArray(item)) {
-            if (hasKeyValuePair(item, targetKey, targetValue)) {
-              return true;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  // Return false if the key-value pair is not found
-  return false;
-};
 
 export const increment_object_x_coordinate = (object: LargeObject, amount: number = 5) => {
   return {
@@ -80,11 +51,6 @@ export const increment_object_x_coordinate = (object: LargeObject, amount: numbe
       },
     },
   };
-}
-
-export const chooseRandomIconValue = () => {
-  const icons = Array.from({length: 10}, (_, i) => `icon-${i}`);
-  return icons[Math.floor(Math.random() * icons.length)];
 }
 
 export const object = {
@@ -104,7 +70,7 @@ export const object = {
     updateAll: (nodes: MinObject[]) => nodes.map(node => ({ ...node, x: node.x + 5 })),
     updateById: (nodes: MinObject[], id: string) => nodes.map(node => node.id === id ? { ...node, x: node.x + 5 } : node),
     updateWhere: (nodes: MinObject[], key, value) =>
-      nodes.map(node => hasKeyValuePair(node, key, value) ? { ...node, x: node.x + 5 } : node),
+      nodes.map(node => hasKeyValuePair(node, key, value) ? ({ ...node, x: node.x + 5 }) : node),
 
     deleteAll: (nodes: MinObject[]) => [],
     deleteById: (nodes: MinObject[], id: string) => nodes.filter(node => node.id !== id),

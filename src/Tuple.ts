@@ -1,3 +1,8 @@
+import {
+  isArray
+} from "./Utils.js";
+
+
 type ID = string;
 type Name = string;
 type Incoming = string | string[];
@@ -11,78 +16,85 @@ type y = number;
 export type MinTuple = [ID, Name, x, y, Icon];
 
 export type CoordinatePairTuple = [x, y];
-
 export type UITuple = [CoordinatePairTuple, Icon];
-
 export type LargeTuple = [ID, Name, Incoming, Outgoing, Metadata, UITuple];
 
+// TODO: Come up with some random icons that can be chosen
+// TODO:
 
-/**
- * 
- * @param tuple A node in a graph
- * @param index The position of the key in the tuple
- * @param value The value to filter by when matching the key in a condition
- * @returns 
- */
+const getValueByIndex = (data, index) => data[index];
 
-const _filterTuplesByIndexValue = (tuple, index: number, value) => {
-  if (tuple[index] === value) {
-    return true;
-  }
-  
-  // Check if the tuple has nested tuples, if so walk down the path of the nested tuples to find the value
-  for (let i in tuple) {
-    if (Array.isArray(tuple[i])) {
-      if (_filterTuplesByIndexValue(tuple[i], index, value)) {
-        return true;
+// Find the indexes where the element at level zero is an array
+const findIndexesOfArraysInArray = (keys) => 
+  !isArray(keys) ? undefined : keys.reduce((found_indexes, k, i) => isArray(k) ? [...found_indexes, i] : found_indexes, []);
+
+
+const largeTupleKeys = [
+  "id",
+  "name",
+  "incoming",
+  "outgoing",
+  [
+    [
+      [
+        [
+          "meanlog",
+          "sdlog"
+        ]
+      ]
+    ]
+  ],
+  [
+    [
+      "x",
+      "y"
+    ],
+    "icon"
+  ]
+];
+
+const findNthLeveLIndex = (keys, key) => {
+  // Base case: We are on the 0th level of the array. Check here first.
+  const base_key_index = keys.indexOf(key);
+  if (base_key_index !== -1) return base_key_index;
+
+  // Recursive case: Check deeper levels.
+  let nested_arrays_indexes = findIndexesOfArraysInArray(keys);
+
+  for (let i = 0; i < nested_arrays_indexes.length; i++) {
+      const current_array_index = nested_arrays_indexes[i];
+      const current_array = keys[current_array_index];
+
+      // Recursively check the nested array
+      const result = findNthLeveLIndex(current_array, key);
+      if (result !== -1) {
+          return [current_array_index, ...isArray(result) ? result : [result]];
       }
-    }
   }
-  return false;
+  // If the key is not found at any level, return -1
+  return -1;
+};
+
+export const useNthLevelIndex = (data, index) => {
+  // index is either a number or an array of numbers
+  if (typeof index === "number") {
+      return getValueByIndex(data, index);
+  }
+  let curr_value = getValueByIndex(data, index[0]);
+  for (let i = 1; i < index.length; i++){
+      curr_value = getValueByIndex(curr_value, index[i]);
+  }
+  return curr_value;
 }
 
+export const filterTupleByKeyValue = (tuple, keys, key, value) => useNthLevelIndex(tuple, findNthLeveLIndex(keys, key)) === value
 
-/**
- * This function filters a graph of nodes by a key-value pair. It should be passed as a callback to the Array.prototype.filter method.
- * The function will return true if the key-value pair exists in the graph. The tuple can be small (flat to 1D) or large (nested af)
- * 
- * @param tuple A node in a graph
- * @param key The key to filter by
- * @param value The value to filter by when matching the key in a condition
- * @returns 
- */
+export const filterSmallTupleByKeyValue = (tuple, key, value) => 
+  filterTupleByKeyValue(tuple, ["id", "name","x", "y", "icon"], key, value)
 
-export const filterTuplesByKeyValue = (tuple: MinTuple | LargeTuple, key: string, value) => {
+export const filterLargeTupleByKeyValue = (tuple, key, value) =>
+  filterTupleByKeyValue(tuple, largeTupleKeys, key, value)
 
-
-  if (tuple.length === 5) {
-    const index = ["id", "name", "x", "y", "icon"].indexOf(key);
-    return _filterTuplesByIndexValue(tuple, index, value);
-  }
-
-  // Check if the key entered by the user is a sub-key (e.g `x`) instead of ui.coordinates.x
-  const base_index = ["id", "name", "incoming", "outgoing", "metadata", "ui"].indexOf(key);
-  if (base_index === -1) {
-    console.log(`Base index=${base_index} | key=${key} | val=${value} | tuple=${tuple[5]}`)
-
-    const ui_tuple = tuple[5];
-    const [coordinate_pair, icon] = ui_tuple;
-    // Assume we are delving in the UI tuple
-    switch (key) {
-      case "x":
-        return coordinate_pair[0] === value;
-      case "y":
-        return coordinate_pair[1] === value;
-      case "icon":
-        return icon === value;
-      // default:
-      //   return false;
-    }
-  }
-
-  return _filterTuplesByIndexValue(tuple, base_index, value);
-  
-};
 
 
 export const increment_tuple_x_coordinate = (tuple: LargeTuple, amount: number = 5) => {
@@ -92,6 +104,12 @@ export const increment_tuple_x_coordinate = (tuple: LargeTuple, amount: number =
 };
 
 
+export const chooseRandomIconValue = () => {
+  const icons = Array.from({length: 10}, (_, i) => `icon-${i}`);
+  return icons[Math.floor(Math.random() * icons.length)];
+}
+
+
 export const tuple = {
   small: {
     add: () => [
@@ -99,23 +117,23 @@ export const tuple = {
       `node`,
       Math.random() * 10,
       Math.random() * 10,
-      "icon",
+      chooseRandomIconValue(), 
     ] as MinTuple,
 
     findAll: (nodes: MinTuple[]) => nodes,
     findById: (nodes: MinTuple[], id: ID) => nodes.find(node => node[0] === id),
-    findWhere: (nodes: MinTuple[], key: string, value) => nodes.filter(node => filterTuplesByKeyValue(node, key, value)),
+    findWhere: (nodes: MinTuple[], key: string, value) => nodes.filter(node => filterSmallTupleByKeyValue(node, key, value)),
     
     updateAll: (nodes: MinTuple[]) => 
       nodes.map(node => [...node, node[2] + 5, node[3], node[4]]),
     updateById: (nodes: MinTuple[], id: ID) =>
       nodes.map(node => (node[0] === id ? [...node, node[2] + 5, node[3], node[4]] : node)),
     updateWhere: (nodes: MinTuple[], key: string, value) => 
-      nodes.map(node => filterTuplesByKeyValue(node, key, value) ?  [...node, node[2] + 5, node[3], node[4]] : node),
+      nodes.map(node => filterSmallTupleByKeyValue(node, key, value) ?  [...node, node[2] + 5, node[3], node[4]] : node),
     
     deleteAll: (nodes: MinTuple[]) => [],
     deleteById: (nodes: MinTuple[], id: ID) => nodes.filter(node => node[0] !== id),
-    deleteWhere: (nodes: MinTuple[], key: string, value) => nodes.filter(node => !filterTuplesByKeyValue(node, key, value)),
+    deleteWhere: (nodes: MinTuple[], key: string, value) => nodes.filter(node => !filterSmallTupleByKeyValue(node, key, value)),
   },
   large: {
     add: () => [
@@ -124,23 +142,20 @@ export const tuple = {
       "d5bc89b2-74ea-4d1a-a0ed-22f4de79a580",
       "d4ae89b2-74ea-4d1a-a0ed-22f4de79a580",
       [[[["log normal"], [0.1640238, 0.4169375]]]],
-      [[Math.random() * 10, Math.random() * 10], "icon"],
+      [[Math.random() * 10, Math.random() * 10], chooseRandomIconValue()],
     ] as LargeTuple,
 
     findAll: (nodes: LargeTuple[]) => nodes,
     findById: (nodes: LargeTuple[], id: ID) => nodes.find(node => node[0] === id),
-    findWhere: (nodes: LargeTuple[], key: string, value) => nodes.filter(node => filterTuplesByKeyValue(node, key, value)),
+    findWhere: (nodes: LargeTuple[], key: string, value) => nodes.filter(node => filterLargeTupleByKeyValue(node, key, value)),
 
     updateAll: (nodes: LargeTuple[]) => nodes.map(node => increment_tuple_x_coordinate(node)),
     updateById: (nodes: LargeTuple[], id: ID) => nodes.map(node => node[0] === id ? increment_tuple_x_coordinate(node) : node),
-    updateWhere: (nodes: LargeTuple[], key: string, value) => {
-      const nodesToUpdate = nodes.filter(node => filterTuplesByKeyValue(node, key, value));
-      const updatedNodes = nodesToUpdate.map(node => increment_tuple_x_coordinate(node));
-      return nodes.map(node => filterTuplesByKeyValue(node, key, value) ? updatedNodes.shift() : node); 
-    },
+    updateWhere: (nodes: LargeTuple[], key: string, value) => 
+      nodes.map(node => filterLargeTupleByKeyValue(node, key, value) ?  increment_tuple_x_coordinate(node) : node),
 
     deleteAll: (nodes: LargeTuple[]) => [],
     deleteById: (nodes: LargeTuple[], id: ID) => nodes.filter(node => node[0] !== id),
-    deleteWhere: (nodes: LargeTuple[], key: string, value) => nodes.filter(node => !filterTuplesByKeyValue(node, key, value)),
+    deleteWhere: (nodes: LargeTuple[], key: string, value) => nodes.filter(node => !filterLargeTupleByKeyValue(node, key, value)),
   },
 };

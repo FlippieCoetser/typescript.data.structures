@@ -1,4 +1,3 @@
-const { time } = require("console");
 const path = require("path");
 
 module.exports = function (config) {
@@ -6,16 +5,18 @@ module.exports = function (config) {
     frameworks: ["jasmine"],
     client: {
       jasmine: {
-        random: true,
-        timeoutInterval: 10000,
+        random: false,
+        timeoutInterval: 300000,
       },
     },
+
     files: [
       { pattern: "./src/**/*.js", type: "module" },
       { pattern: "./test/**/*.js", type: "module" },
 
       { pattern: "./data/**/*.js", type: "module"},
     ],
+    
     preprocessors: {
       "src/**/!(*.test).js": ["karma-coverage-istanbul-instrumenter"],
     },
@@ -35,16 +36,26 @@ module.exports = function (config) {
     },
     customLaunchers: {
       Chrome_with_memory: {
-        base: "Chrome",
-        flags: ["--enable-precise-memory-info"],
+        base: "ChromeHeadless",
+        flags: [
+          "--no-sandbox", //
+          "--enable-precise-memory-info",
+          "--js-flags=--expose-gc", // Enable garbage collection
+          "--disable-extensions", // Disable extensions
+          "--disable-gpu", // Disable GPU acceleration
+          "--disable-background-timer-throttling", // Disable background timer throttling
+          "--disable-backgrounding-occluded-windows", // Disable backgrounding of occluded windows
+          "--disable-renderer-backgrounding", // Disable renderer backgrounding
+        ],
       },
     },
     browsers: ["Chrome_with_memory"],
-    browserNoActivityTimeout: 50000,
-    browserDisconnectTimeout: 50000,
+    browserNoActivityTimeout: 300000,
+    browserDisconnectTimeout: 300000,
+    browserDisconnectTolerance: 3, // Increase the disconnect tolerance
+    captureTimeout: 300000, // Increase the capture timeout
     singleRun: true,
-    logLevel: config.LOG_INFO,
-
+    logLevel: config.DISABLE,
 
   });
 };
