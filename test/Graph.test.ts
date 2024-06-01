@@ -617,6 +617,89 @@ describe("Given graph = new Graph(Object)", () => {
 
   // TODO: AddNodeMetaData
 
+  describe("when benchmarking graph.moveAllNodes", () => {
+    let details;
+    let nodes;
+    let offset;
+
+    let moveNode;
+
+    beforeEach(() => {
+      details = {
+        name: "Node",
+        type: Utilities.getRandomElement<NodeType>(NodeTypes),
+        coordinates: { x: 0, y: 0 },
+        icon: "./icon.svg",
+      };
+      offset = { x: 10, y: 10 };
+      moveNode = (node) => ({
+          ...node, coordinates: { x: node.coordinates.x + offset.x, y: node.coordinates.y + offset.y }
+        });
+    });
+
+    it("then moving all nodes by an offset in a set of 1 nodes takes", () => {
+      nodes = structuredClone(graph.createNodes(1, details));
+      let meta = { structure: "Object", action: "moveAllNodes", after: 1 };
+      let results = Benchmark.Performance(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)))
+    });
+    it("then moving all nodes by an offset in a set of 1 nodes consumes", () => {
+      nodes = structuredClone(graph.createNodes(1, details));
+      let meta = { structure: "Object", action: "moveAllNodes", after: 1 };
+      let results = Benchmark.Memory(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)))
+    });
+    it("then moving all nodes by an offset in a set of 10 nodes takes", () => {
+      nodes = structuredClone(graph.createNodes(10, details));
+      let meta = { structure: "Object", action: "moveAllNodes", after: 10 };
+      let results = Benchmark.Performance(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)))
+    });
+    it("then moving all nodes by an offset in a set of 10 nodes consumes", () => {
+      nodes = structuredClone(graph.createNodes(10, details));
+      let meta = { structure: "Object", action: "moveAllNodes", after: 10 };
+      let results = Benchmark.Memory(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)))
+    });
+    it("then moving all nodes by an offset in a set of 100 nodes takes", () => {
+      nodes = structuredClone(graph.createNodes(100, details));
+      let meta = { structure: "Object", action: "moveAllNodes", after: 100 };
+      let results = Benchmark.Performance(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)));
+    });
+    it("then moving all nodes by an offset in a set of 100 nodes consumes", () => {
+      nodes = structuredClone(graph.createNodes(100, details));
+      let meta = { structure: "Object", action: "moveAllNodes", after: 100 };
+      let results = Benchmark.Memory(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)));
+    });
+    it("then moving all nodes by an offset in a set of 1000 nodes takes", () => {
+      nodes = structuredClone(graph.createNodes(1000, details));
+      let meta = { structure: "Object", action: "moveAllNodes", after: 1000 };
+      let results = Benchmark.Performance(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)));
+    });
+    it("then moving all nodes by an offset in a set of 1000 nodes consumes", () => {
+      nodes = structuredClone(graph.createNodes(1000, details));
+      let meta = { structure: "Object", action: "moveAllNodes", after: 1000 };
+      let results = Benchmark.Memory(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)));
+    });
+    it("then moving all nodes by an offset in a set of 10000 nodes takes", () => {
+      nodes = structuredClone(graph.createNodes(10000, details));
+      let meta = { structure: "Object", action: "moveAllNodes", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)));
+    });
+    it("then moving all nodes by an offset in a set of 10000 nodes consumes", () => {
+      nodes = structuredClone(graph.createNodes(10000, details));
+      let meta = { structure: "Object", action: "moveAllNodes", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)));
+    });
+
+  });
+
   describe("when benchmarking graph.removeNodeById", () => {
     let details;
     let nodes;
@@ -1334,7 +1417,92 @@ describe("Given graph = new Graph(Tuple)", () => {
 
   // TODO: AddNodeMetaData
 
-  // TODO: MoveAllNodes
+  describe("when benchmarking graph.moveAllNodes", () => {
+    let details;
+    let nodes;
+    let offset;
+
+    let moveNode;
+
+    beforeEach(() => {
+      details = {
+        name: "Node",
+        type: Utilities.getRandomElement<NodeType>(NodeTypes),
+        coordinates: { x: 0, y: 0 },
+        icon: "./icon.svg",
+      };
+      offset = { x: 10, y: 10 };
+
+      moveNode = (node) => {
+        node[3] = [node[3][0] + offset.x, node[3][1] + offset.y];
+        return node;
+      }
+    });
+
+    it("then moving all nodes by an offset in a set of 1 nodes takes", () => {
+      nodes = structuredClone(graph.createNodes(1, details));
+      let meta = { structure: "Tuple", action: "moveAllNodes", after: 1 };
+      let results = Benchmark.Performance(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)))
+    });
+    it("then moving all nodes by an offset in a set of 1 nodes consumes", () => {
+      nodes = structuredClone(graph.createNodes(1, details));
+      let meta = { structure: "Tuple", action: "moveAllNodes", after: 1 };
+      let results = Benchmark.Memory(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)))
+    });
+    it("then moving all nodes by an offset in a set of 10 nodes takes", () => {
+      nodes = structuredClone(graph.createNodes(10, details));
+      let meta = { structure: "Tuple", action: "moveAllNodes", after: 10 };
+      let results = Benchmark.Performance(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)))
+    });
+    it("then moving all nodes by an offset in a set of 10 nodes consumes", () => {
+      nodes = structuredClone(graph.createNodes(10, details));
+      let meta = { structure: "Tuple", action: "moveAllNodes", after: 10 };
+      let results = Benchmark.Memory(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)))
+    });
+    it("then moving all nodes by an offset in a set of 100 nodes takes", () => {
+      nodes = structuredClone(graph.createNodes(100, details));
+      let meta = { structure: "Tuple", action: "moveAllNodes", after: 100 };
+      let results = Benchmark.Performance(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)));
+    });
+    it("then moving all nodes by an offset in a set of 100 nodes consumes", () => {
+      nodes = structuredClone(graph.createNodes(100, details));
+      let meta = { structure: "Tuple", action: "moveAllNodes", after: 100 };
+      let results = Benchmark.Memory(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)));
+    });
+    it("then moving all nodes by an offset in a set of 1000 nodes takes", () => {
+      nodes = structuredClone(graph.createNodes(1000, details));
+      let meta = { structure: "Tuple", action: "moveAllNodes", after: 1000 };
+      let results = Benchmark.Performance(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)));
+    });
+    it("then moving all nodes by an offset in a set of 1000 nodes consumes", () => {
+      nodes = structuredClone(graph.createNodes(1000, details));
+      let meta = { structure: "Tuple", action: "moveAllNodes", after: 1000 };
+      let results = Benchmark.Memory(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)));
+    });
+    it("then moving all nodes by an offset in a set of 10000 nodes takes", () => {
+      nodes = structuredClone(graph.createNodes(10000, details));
+      let meta = { structure: "Tuple", action: "moveAllNodes", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)));
+    });
+    it("then moving all nodes by an offset in a set of 10000 nodes consumes", () => {
+      nodes = structuredClone(graph.createNodes(10000, details));
+      let meta = { structure: "Tuple", action: "moveAllNodes", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.moveAllNodes, nodes, offset);
+      expect(results).toEqual(nodes.map(node => moveNode(node)));
+    });
+  });
+
+
+
   describe("when benchmarking graph.removeNodeById", () => {
     let details;
     let nodes;
