@@ -416,7 +416,121 @@ describe("Given graph = new Graph(Object)", () => {
       expect(results.length).toEqual(1 + 10000);
     });
   });
+
+  describe("when benchmarking graph.addNodes function", () => {
+    let details;
+    let nodes;
+    beforeEach(() => {
+      details = {
+        name: "Node",
+        type: Utilities.getRandomElement<NodeType>(NodeTypes),
+        coordinates: { x: 0, y: 0 },
+        icon: "./icon.svg",
+      };
+
+      nodes = graph.createNodes(1000, details);
+    });
+
+    /**
+     * - When benchmarking addNodes(nodes, newNodes), vary the quantity of newNodes and benchmark that.
+	      - Deep clone both the existing set of nodes and the new nodes (before benchmarking)
+     */
+
+      it("then adding adding a new set of 1 nodes to an existing set of 1000 nodes takes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(1, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Object", action: "addNodes", after: 1 };
+        let results = Benchmark.Performance(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(1 + 1000);
+      });
+      it("then adding adding a new set of 1 nodes to an existing set of 1000 nodes consumes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(1, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Object", action: "addNodes", after: 1 };
+        let results = Benchmark.Memory(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(1 + 1000);
+      });
+
+      it("then adding adding a new set of 10 nodes to an existing set of 1000 nodes takes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(10, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Object", action: "addNodes", after: 10 };
+        let results = Benchmark.Performance(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(10 + 1000);
+      });
+      it("then adding adding a new set of 10 nodes to an existing set of 1000 nodes consumes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(10, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Object", action: "addNodes", after: 10 };
+        let results = Benchmark.Memory(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(10 + 1000);
+      });
+
+      it("then adding a new set of 100 nodes to an existing set of 1000 nodes takes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(100, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Object", action: "addNodes", after: 100 };
+        let results = Benchmark.Performance(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(100 + 1000);
+      });
+      
+      it("then adding a new set of 100 nodes to an existing set of 1000 nodes consumes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(100, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Object", action: "addNodes", after: 100 };
+        let results = Benchmark.Memory(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(100 + 1000);
+      });
+      
+      it("then adding a new set of 1000 nodes to an existing set of 1000 nodes takes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(1000, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Object", action: "addNodes", after: 1000 };
+        let results = Benchmark.Performance(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(1000 + 1000);
+      });
+      
+      it("then adding a new set of 1000 nodes to an existing set of 1000 nodes consumes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(1000, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Object", action: "addNodes", after: 1000 };
+        let results = Benchmark.Memory(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(1000 + 1000);
+      });
+      
+      it("then adding a new set of 10000 nodes to an existing set of 1000 nodes takes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(10000, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Object", action: "addNodes", after: 10000 };
+        let results = Benchmark.Performance(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(10000 + 1000);
+      });
+      
+      it("then adding a new set of 10000 nodes to an existing set of 1000 nodes consumes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(10000, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Object", action: "addNodes", after: 10000 };
+        let results = Benchmark.Memory(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(10000 + 1000);
+      });
+  });
+
+
 });
+
+/**
+ * Tuple is below: Find this comment in CTRL + F
+ */
 
 import { Tuple } from "tuple";
 describe("Given graph = new Graph(Tuple)", () => {
@@ -424,6 +538,10 @@ describe("Given graph = new Graph(Tuple)", () => {
   beforeEach(() => {
     graph = new Graph(Tuple);
   });
+
+  /**
+   * Tuple existence tests
+   */
   it("then graph exist", () => {
     expect(graph).toBeDefined();
   });
@@ -454,6 +572,10 @@ describe("Given graph = new Graph(Tuple)", () => {
   it("then graph.removeNodeById exist", () => {
     expect(graph.removeNodeById).toBeDefined();
   });
+
+  /**
+   * Tuple methods
+   */
   describe("when nodes = graph.createNodes(1, details)", () => {
     let nodes;
     beforeEach(() => {
@@ -790,7 +912,6 @@ describe("Given graph = new Graph(Tuple)", () => {
       let results = Benchmark.Memory(meta, graph.addNode, nodes, details);
       expect(results.length).toEqual(1 + 100);
     });
-
     it("then adding 1 node to an existing set of 1000 nodes takes", () => {
       let nodes = graph.createNodes(1000, details);
       nodes = structuredClone(nodes);
@@ -820,7 +941,112 @@ describe("Given graph = new Graph(Tuple)", () => {
       let results = Benchmark.Memory(meta, graph.addNode, nodes, details);
       expect(results.length).toEqual(1 + 10000);
     });
-    
-
   });
+  describe("when benchmarking graph.addNodes function", () => {
+    let details;
+    let nodes;
+    beforeEach(() => {
+      details = {
+        name: "Node",
+        type: Utilities.getRandomElement<NodeType>(NodeTypes),
+        coordinates: { x: 0, y: 0 },
+        icon: "./icon.svg",
+      };
+
+      nodes = graph.createNodes(1000, details);
+    });
+
+      it("then adding adding a new set of 1 nodes to an existing set of 1000 nodes takes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(1, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Tuple", action: "addNodes", after: 1 };
+        let results = Benchmark.Performance(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(1 + 1000);
+      });
+      it("then adding adding a new set of 1 nodes to an existing set of 1000 nodes consumes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(1, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Tuple", action: "addNodes", after: 1 };
+        let results = Benchmark.Memory(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(1 + 1000);
+      });
+
+      it("then adding adding a new set of 10 nodes to an existing set of 1000 nodes takes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(10, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Tuple", action: "addNodes", after: 10 };
+        let results = Benchmark.Performance(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(10 + 1000);
+      });
+      it("then adding adding a new set of 10 nodes to an existing set of 1000 nodes consumes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(10, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Tuple", action: "addNodes", after: 10 };
+        let results = Benchmark.Memory(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(10 + 1000);
+      });
+
+      it("then adding a new set of 100 nodes to an existing set of 1000 nodes takes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(100, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Tuple", action: "addNodes", after: 100 };
+        let results = Benchmark.Performance(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(100 + 1000);
+      });
+      
+      it("then adding a new set of 100 nodes to an existing set of 1000 nodes consumes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(100, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Tuple", action: "addNodes", after: 100 };
+        let results = Benchmark.Memory(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(100 + 1000);
+      });
+      
+      it("then adding a new set of 1000 nodes to an existing set of 1000 nodes takes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(1000, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Tuple", action: "addNodes", after: 1000 };
+        let results = Benchmark.Performance(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(1000 + 1000);
+      });
+      
+      it("then adding a new set of 1000 nodes to an existing set of 1000 nodes consumes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(1000, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Tuple", action: "addNodes", after: 1000 };
+        let results = Benchmark.Memory(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(1000 + 1000);
+      });
+      
+      it("then adding a new set of 10000 nodes to an existing set of 1000 nodes takes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(10000, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Tuple", action: "addNodes", after: 10000 };
+        let results = Benchmark.Performance(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(10000 + 1000);
+      });
+      
+      it("then adding a new set of 10000 nodes to an existing set of 1000 nodes consumes", () => {
+        nodes = structuredClone(nodes);
+        let newNodes = graph.createNodes(10000, details);
+        newNodes = structuredClone(newNodes);
+        let meta = { structure: "Tuple", action: "addNodes", after: 10000 };
+        let results = Benchmark.Memory(meta, graph.addNodes, nodes, newNodes);
+        expect(results.length).toEqual(10000 + 1000);
+      });
+  });
+
+
+
+
+
 });
