@@ -416,7 +416,6 @@ describe("Given graph = new Graph(Object)", () => {
       expect(results.length).toEqual(1 + 10000);
     });
   });
-
   describe("when benchmarking graph.addNodes function", () => {
     let details;
     let nodes;
@@ -427,15 +426,8 @@ describe("Given graph = new Graph(Object)", () => {
         coordinates: { x: 0, y: 0 },
         icon: "./icon.svg",
       };
-
       nodes = graph.createNodes(1000, details);
     });
-
-    /**
-     * - When benchmarking addNodes(nodes, newNodes), vary the quantity of newNodes and benchmark that.
-	      - Deep clone both the existing set of nodes and the new nodes (before benchmarking)
-     */
-
       it("then adding adding a new set of 1 nodes to an existing set of 1000 nodes takes", () => {
         nodes = structuredClone(nodes);
         let newNodes = graph.createNodes(1, details);
@@ -523,6 +515,102 @@ describe("Given graph = new Graph(Object)", () => {
         let results = Benchmark.Memory(meta, graph.addNodes, nodes, newNodes);
         expect(results.length).toEqual(10000 + 1000);
       });
+  });
+  describe("when benchmarking graph.findNodeById function", () => {
+    let details;
+    let nodes;
+    let nodeToFind;
+    let id;
+    beforeEach(() => {
+      details = {
+        name: "Node",
+        type: Utilities.getRandomElement<NodeType>(NodeTypes),
+        coordinates: { x: 0, y: 0 },
+        icon: "./icon.svg",
+      };
+      nodes = graph.createNodes(10000, details);
+    });
+
+    it("then finding the ID of the node at the 1st position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[0];
+      id = nodeToFind.id;
+      let meta = { structure: "Object", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.findNodeById, nodes, id);
+      expect(results.id).toEqual(id);
+    });
+    it("then finding the ID of the node at the 1st position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[0];
+      id = nodeToFind.id;
+      let meta = { structure: "Object", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.findNodeById, nodes, id);
+      expect(results.id).toEqual(id);
+    });
+    it("then finding the ID of the node at the 10th position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[10-1];
+      id = nodeToFind.id;
+      let meta = { structure: "Object", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.findNodeById, nodes, id);
+      expect(results.id).toEqual(id);
+    });
+    it("then finding the ID of the node at the 10th position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[10-1];
+      id = nodeToFind.id;
+      let meta = { structure: "Object", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.findNodeById, nodes, id);
+      expect(results.id).toEqual(id);
+    });
+    it("then finding the ID of the node at the 100th position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[100-1];
+      id = nodeToFind.id;
+      let meta = { structure: "Object", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.findNodeById, nodes, id);
+      expect(results.id).toEqual(id);
+    });
+    it("then finding the ID of the node at the 100th position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[100-1];
+      id = nodeToFind.id;
+      let meta = { structure: "Object", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.findNodeById, nodes, id);
+      expect(results.id).toEqual(id);
+    });
+    it("then finding the ID of the node at the 1000th position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[1000-1];
+      id = nodeToFind.id;
+      let meta = { structure: "Object", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.findNodeById, nodes, id);
+      expect(results.id).toEqual(id);
+    });
+    it("then finding the ID of the node at the 1000th position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[1000-1];
+      id = nodeToFind.id;
+      let meta = { structure: "Object", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.findNodeById, nodes, id);
+      expect(results.id).toEqual(id);
+    });
+    it("then finding the ID of the node at the 10000th position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[10000-1];
+      id = nodeToFind.id;
+      let meta = { structure: "Object", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.findNodeById, nodes, id);
+      expect(results.id).toEqual(id);
+    });
+    it("then finding the ID of the node at the 10000th position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[10000-1];
+      id = nodeToFind.id;
+      let meta = { structure: "Object", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.findNodeById, nodes, id);
+      expect(results.id).toEqual(id);
+    });
   });
 
 
@@ -1044,8 +1132,106 @@ describe("Given graph = new Graph(Tuple)", () => {
         expect(results.length).toEqual(10000 + 1000);
       });
   });
+  describe("when benchmarking graph.findNodeById function", () => {
+    let details;
+    let nodes;
+    let nodeToFind;
+    let id;
+    beforeEach(() => {
+      details = {
+        name: "Node",
+        type: Utilities.getRandomElement<NodeType>(NodeTypes),
+        coordinates: { x: 0, y: 0 },
+        icon: "./icon.svg",
+      };
+      nodes = graph.createNodes(10000, details);
+    });
 
+    it("then finding the ID of the node at the 1st position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[0];
+      id = nodeToFind[0]
+      let meta = { structure: "Tuple", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.findNodeById, nodes, id);
+      expect(results[0]).toEqual(id);
+    });
+    it("then finding the ID of the node at the 1st position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[0];
+      id = nodeToFind[0]
+      let meta = { structure: "Tuple", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.findNodeById, nodes, id);
+      expect(results[0]).toEqual(id);
+    });
+    it("then finding the ID of the node at the 10th position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[10-1];
+      id = nodeToFind[0]
+      let meta = { structure: "Tuple", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.findNodeById, nodes, id);
+      expect(results[0]).toEqual(id);
+    });
+    it("then finding the ID of the node at the 10th position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[10-1];
+      id = nodeToFind[0]
+      let meta = { structure: "Tuple", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.findNodeById, nodes, id);
+      expect(results[0]).toEqual(id);
+    });
+    it("then finding the ID of the node at the 100th position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[100-1];
+      id = nodeToFind[0]
+      let meta = { structure: "Tuple", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.findNodeById, nodes, id);
+      expect(results[0]).toEqual(id);
+    });
+    it("then finding the ID of the node at the 100th position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[100-1];
+      id = nodeToFind[0]
+      let meta = { structure: "Tuple", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.findNodeById, nodes, id);
+      expect(results[0]).toEqual(id);
+    });
+    it("then finding the ID of the node at the 1000th position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[1000-1];
+      id = nodeToFind[0]
+      let meta = { structure: "Tuple", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.findNodeById, nodes, id);
+      expect(results[0]).toEqual(id);
+    });
+    it("then finding the ID of the node at the 1000th position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[1000-1];
+      id = nodeToFind[0]
+      let meta = { structure: "Tuple", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.findNodeById, nodes, id);
+      expect(results[0]).toEqual(id);
+    });
+    it("then finding the ID of the node at the 10000th position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[10000-1];
+      id = nodeToFind[0]
+      let meta = { structure: "Tuple", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.findNodeById, nodes, id);
+      expect(results[0]).toEqual(id);
+    });
+    it("then finding the ID of the node at the 10000th position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToFind = nodes[10000-1];
+      id = nodeToFind[0]
+      let meta = { structure: "Tuple", action: "findNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.findNodeById, nodes, id);
+      expect(results[0]).toEqual(id);
+    });
+  });
 
+  // TODO: FindNodesByType
+
+  
 
 
 
