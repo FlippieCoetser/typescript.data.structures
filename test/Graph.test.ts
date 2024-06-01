@@ -615,9 +615,118 @@ describe("Given graph = new Graph(Object)", () => {
 
   // TODO: FindByType
 
-  // TODO: AddNodeMetaData
 
-  describe("when benchmarking graph.moveAllNodes", () => {
+  describe("when benchmarking graph.addNodeMetadata function", () => {
+    let details;
+    let nodes;
+    let nodeToExtendWithMetaData;
+    let id;
+    let newMetaData;
+  
+    let addNewMetaData;
+    beforeEach(() => {
+      details = {
+        name: "Node",
+        type: Utilities.getRandomElement<NodeType>(NodeTypes),
+        coordinates: { x: 0, y: 0 },
+        icon: "./icon.svg",
+      };
+      nodes = graph.createNodes(10000, details);
+      newMetaData = { test: "test" };
+    });
+  
+    it("then adding new metadata to the node at the 1st position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[0];
+      id = nodeToExtendWithMetaData.id;
+      let meta = { structure: "Object", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[0].metadata).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 1st position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[0];
+      id = nodeToExtendWithMetaData.id;
+      let meta = { structure: "Object", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[0].metadata).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 10th position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[10-1];
+      id = nodeToExtendWithMetaData.id;
+      let meta = { structure: "Object", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[10-1].metadata).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 10th position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[10-1];
+      id = nodeToExtendWithMetaData.id;
+      let meta = { structure: "Object", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[10-1].metadata).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 100th position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[100-1];
+      id = nodeToExtendWithMetaData.id;
+      let meta = { structure: "Object", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[100-1].metadata).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 100th position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[100-1];
+      id = nodeToExtendWithMetaData.id;
+      let meta = { structure: "Object", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[100-1].metadata).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 1000th position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[1000-1];
+      id = nodeToExtendWithMetaData.id;
+      let meta = { structure: "Object", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[1000-1].metadata).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 1000th position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[1000-1];
+      id = nodeToExtendWithMetaData.id;
+      let meta = { structure: "Object", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[1000-1].metadata).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 10000th position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[10000-1];
+      id = nodeToExtendWithMetaData.id;
+      let meta = { structure: "Object", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[10000-1].metadata).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 10000th position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[10000-1];
+      id = nodeToExtendWithMetaData.id;
+      let meta = { structure: "Object", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[10000-1].metadata).toEqual([newMetaData])
+    });
+  });
+  describe("when benchmarking graph.moveAllNodes function", () => {
     let details;
     let nodes;
     let offset;
@@ -699,8 +808,7 @@ describe("Given graph = new Graph(Object)", () => {
     });
 
   });
-
-  describe("when benchmarking graph.removeNodeById", () => {
+  describe("when benchmarking graph.removeNodeById function", () => {
     let details;
     let nodes;
     let nodeToRemove;
@@ -1415,8 +1523,115 @@ describe("Given graph = new Graph(Tuple)", () => {
 
   // TODO: FindNodesByType
 
-  // TODO: AddNodeMetaData
+  describe("when benchmarking graph.addNodeMetadata function", () => {
+    let details;
+    let nodes;
+    let nodeToExtendWithMetaData;
+    let id;
+    let newMetaData;
 
+    let addNewMetaData;
+    beforeEach(() => {
+      details = {
+        name: "Node",
+        type: Utilities.getRandomElement<NodeType>(NodeTypes),
+        coordinates: { x: 0, y: 0 },
+        icon: "./icon.svg",
+      };
+      nodes = graph.createNodes(10000, details);
+      newMetaData = { test: "test" };
+    });
+    it("then adding new metadata to the node at the 1st position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[0];
+      id = nodeToExtendWithMetaData[0];
+      let meta = { structure: "Tuple", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[0][5]).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 1st position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[0];
+      id = nodeToExtendWithMetaData[0];
+      let meta = { structure: "Tuple", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[0][5]).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 10th position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[10-1];
+      id = nodeToExtendWithMetaData[0];
+      let meta = { structure: "Tuple", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[10-1][5]).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 10th position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[10-1];
+      id = nodeToExtendWithMetaData[0];
+      let meta = { structure: "Tuple", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[10-1][5]).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 100th position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[100-1];
+      id = nodeToExtendWithMetaData[0];
+      let meta = { structure: "Tuple", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[100-1][5]).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 100th position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[100-1];
+      id = nodeToExtendWithMetaData[0];
+      let meta = { structure: "Tuple", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[100-1][5]).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 1000th position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[1000-1];
+      id = nodeToExtendWithMetaData[0];
+      let meta = { structure: "Tuple", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[1000-1][5]).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 1000th position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[1000-1];
+      id = nodeToExtendWithMetaData[0];
+      let meta = { structure: "Tuple", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[1000-1][5]).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 10000th position takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[10000-1];
+      id = nodeToExtendWithMetaData[0];
+      let meta = { structure: "Tuple", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[10000-1][5]).toEqual([newMetaData])
+    });
+    it("then adding new metadata to the node at the 10000th position consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToExtendWithMetaData = nodes[10000-1];
+      id = nodeToExtendWithMetaData[0];
+      let meta = { structure: "Tuple", action: "addNodeMetadata", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.addNodeMetadata, nodes, id, newMetaData);
+      results = structuredClone(results);
+      expect(results[10000-1][5]).toEqual([newMetaData])
+    });
+  });
   describe("when benchmarking graph.moveAllNodes", () => {
     let details;
     let nodes;
@@ -1500,9 +1715,6 @@ describe("Given graph = new Graph(Tuple)", () => {
       expect(results).toEqual(nodes.map(node => moveNode(node)));
     });
   });
-
-
-
   describe("when benchmarking graph.removeNodeById", () => {
     let details;
     let nodes;
@@ -1599,8 +1811,4 @@ describe("Given graph = new Graph(Tuple)", () => {
       expect(results.length).toEqual(nodes.length - 1);
     });
   });
-
-
-
-
 });
