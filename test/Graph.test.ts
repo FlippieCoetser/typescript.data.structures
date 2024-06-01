@@ -613,6 +613,107 @@ describe("Given graph = new Graph(Object)", () => {
     });
   });
 
+  // TODO: FindByType
+
+  // TODO: AddNodeMetaData
+
+  describe("when benchmarking graph.removeNodeById", () => {
+    let details;
+    let nodes;
+    let nodeToRemove;
+    let id;
+    beforeEach(() => {
+      details = {
+        name: "Node",
+        type: Utilities.getRandomElement<NodeType>(NodeTypes),
+        coordinates: { x: 0, y: 0 },
+        icon: "./icon.svg",
+      };
+      nodes = graph.createNodes(10000, details);
+    });
+
+    it("then removing the node at the 1st position by ID takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[0];
+      id = nodeToRemove.id
+      let meta = { structure: "Object", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 1st position by ID consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[0];
+      id = nodeToRemove.id
+      let meta = { structure: "Object", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 10th position by ID takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[10-1];
+      id = nodeToRemove.id
+      let meta = { structure: "Object", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 10th position by ID consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[10-1];
+      id = nodeToRemove.id
+      let meta = { structure: "Object", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 100th position by ID takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[100-1];
+      id = nodeToRemove.id
+      let meta = { structure: "Object", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 100th position by ID consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[100-1];
+      id = nodeToRemove.id
+      let meta = { structure: "Object", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 1000th position by ID takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[1000-1];
+      id = nodeToRemove.id
+      let meta = { structure: "Object", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 1000th position by ID consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[1000-1];
+      id = nodeToRemove.id
+      let meta = { structure: "Object", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 10000th position by ID takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[10000-1];
+      id = nodeToRemove.id
+      let meta = { structure: "Object", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 10000th position by ID consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[10000-1];
+      id = nodeToRemove.id
+      let meta = { structure: "Object", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+  });
+
 
 });
 
@@ -1231,7 +1332,106 @@ describe("Given graph = new Graph(Tuple)", () => {
 
   // TODO: FindNodesByType
 
-  
+  // TODO: AddNodeMetaData
+
+  // TODO: MoveAllNodes
+  describe("when benchmarking graph.removeNodeById", () => {
+    let details;
+    let nodes;
+    let nodeToRemove;
+    let id;
+    beforeEach(() => {
+      details = {
+        name: "Node",
+        type: Utilities.getRandomElement<NodeType>(NodeTypes),
+        coordinates: { x: 0, y: 0 },
+        icon: "./icon.svg",
+      };
+      nodes = graph.createNodes(10000, details);
+    });
+
+    it("then removing the node at the 1st position by ID takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[0];
+      id = nodeToRemove[0]
+      let meta = { structure: "Tuple", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 1st position by ID consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[0];
+      id = nodeToRemove[0]
+      let meta = { structure: "Tuple", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 10th position by ID takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[10-1];
+      id = nodeToRemove[0]
+      let meta = { structure: "Tuple", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 10th position by ID consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[10-1];
+      id = nodeToRemove[0]
+      let meta = { structure: "Tuple", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 100th position by ID takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[100-1];
+      id = nodeToRemove[0]
+      let meta = { structure: "Tuple", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 100th position by ID consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[100-1];
+      id = nodeToRemove[0]
+      let meta = { structure: "Tuple", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 1000th position by ID takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[1000-1];
+      id = nodeToRemove[0]
+      let meta = { structure: "Tuple", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 1000th position by ID consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[1000-1];
+      id = nodeToRemove[0]
+      let meta = { structure: "Tuple", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 10000th position by ID takes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[10000-1];
+      id = nodeToRemove[0]
+      let meta = { structure: "Tuple", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Performance(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+    it("then removing the node at the 10000th position by ID consumes", () => {
+      nodes = structuredClone(nodes);
+      nodeToRemove = nodes[10000-1];
+      id = nodeToRemove[0]
+      let meta = { structure: "Tuple", action: "removeNodeById", after: 10000 };
+      let results = Benchmark.Memory(meta, graph.removeNodeById, nodes, id);
+      expect(results.length).toEqual(nodes.length - 1);
+    });
+  });
+
 
 
 
