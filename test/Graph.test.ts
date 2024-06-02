@@ -608,7 +608,6 @@ describe("Given graph = new Graph(Object)", () => {
       expect(results.id).toEqual(id);
     });
   });
-
   describe("when benchmarking graph.findNodesByType function", () => {
     let details;
     let nodes;
@@ -730,7 +729,6 @@ describe("Given graph = new Graph(Object)", () => {
       });
     });
   });
-
   describe("when benchmarking graph.addNodeMetadata function", () => {
     let details;
     let nodes;
@@ -1258,7 +1256,7 @@ describe("Given graph = new Graph(Tuple)", () => {
     it("then create 1 node takes", () => {
       let qty = 1;
       let nodes = Benchmark.Performance(
-        { structure: "Object", action: "createNodes", qty: qty },
+        { structure: "Tuple", action: "createNodes", qty: qty },
         graph.createNodes,
         qty,
         details
@@ -1268,7 +1266,7 @@ describe("Given graph = new Graph(Tuple)", () => {
     it("then create 1 node consumes", () => {
       let qty = 1;
       let nodes = Benchmark.Memory(
-        { structure: "Object", action: "createNodes", qty: qty },
+        { structure: "Tuple", action: "createNodes", qty: qty },
         graph.createNodes,
         qty,
         details
@@ -1278,7 +1276,7 @@ describe("Given graph = new Graph(Tuple)", () => {
     it("then create 10 node takes", () => {
       let qty = 10;
       let nodes = Benchmark.Performance(
-        { structure: "Object", action: "createNodes", qty: qty },
+        { structure: "Tuple", action: "createNodes", qty: qty },
         graph.createNodes,
         qty,
         details
@@ -1287,43 +1285,43 @@ describe("Given graph = new Graph(Tuple)", () => {
     });
     it("then create 10 node consumes", () => {
       let qty = 10;
-      let meta = { structure: "Object", action: "createNodes", qty: qty };
+      let meta = { structure: "Tuple", action: "createNodes", qty: qty };
       let nodes = Benchmark.Memory(meta, graph.createNodes, qty, details);
       expect(nodes.length).toEqual(qty);
     });
     it("then create 100 node takes", () => {
       let qty = 100;
-      let meta = { structure: "Object", action: "createNodes", qty: qty };
+      let meta = { structure: "Tuple", action: "createNodes", qty: qty };
       let nodes = Benchmark.Performance(meta, graph.createNodes, qty, details);
       expect(nodes.length).toEqual(qty);
     });
     it("then create 100 node consumes", () => {
       let qty = 100;
-      let meta = { structure: "Object", action: "createNodes", qty: qty };
+      let meta = { structure: "Tuple", action: "createNodes", qty: qty };
       let nodes = Benchmark.Memory(meta, graph.createNodes, qty, details);
       expect(nodes.length).toEqual(qty);
     });
     it("then create 1000 node takes", () => {
       let qty = 1000;
-      let meta = { structure: "Object", action: "createNodes", qty: qty };
+      let meta = { structure: "Tuple", action: "createNodes", qty: qty };
       let nodes = Benchmark.Performance(meta, graph.createNodes, qty, details);
       expect(nodes.length).toEqual(qty);
     });
     it("then create 1000 node consumes", () => {
       let qty = 1000;
-      let meta = { structure: "Object", action: "createNodes", qty: qty };
+      let meta = { structure: "Tuple", action: "createNodes", qty: qty };
       let nodes = Benchmark.Memory(meta, graph.createNodes, qty, details);
       expect(nodes.length).toEqual(qty);
     });
     it("then create 10000 node takes", () => {
       let qty = 10000;
-      let meta = { structure: "Object", action: "createNodes", qty: qty };
+      let meta = { structure: "Tuple", action: "createNodes", qty: qty };
       let nodes = Benchmark.Performance(meta, graph.createNodes, qty, details);
       expect(nodes.length).toEqual(qty);
     });
     it("then create 10000 node consumes", () => {
       let qty = 10000;
-      let meta = { structure: "Object", action: "createNodes", qty: qty };
+      let meta = { structure: "Tuple", action: "createNodes", qty: qty };
       let nodes = Benchmark.Memory(meta, graph.createNodes, qty, details);
       expect(nodes.length).toEqual(qty);
     });
