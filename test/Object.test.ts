@@ -1,10 +1,10 @@
 import { Utilities } from "utilities";
 import { NodeTypes, NodeType, Metadata } from "types";
 
-import { Object, ObjectNode, ObjectCoordinates } from "object";
+import { Object, ObjectCoordinates, ObjectNode } from "object";
 
 describe("Given Object imported", () => {
-  it("then Objet is defined", () => {
+  it("then Object is defined", () => {
     expect(Object).toBeDefined();
   });
   it("then Object.structure static property is defined", () => {
@@ -22,7 +22,7 @@ describe("Given Object imported", () => {
 });
 
 describe("Given Object.structure static property exist", () => {
-  it("then Object.structure equals object", () => {
+  it("then Object.structure equals Object", () => {
     expect(Object.structure).toEqual("object");
   });
 });
@@ -129,7 +129,7 @@ describe("Given Object.extend static method exist", () => {
     it("then extendedNode.icon equals node.icon", () => {
       expect(extendedNode.icon).toEqual(node.icon);
     });
-    it("then result.metadata equals metadata", () => {
+    it("then result.metadata[0] equals metadata", () => {
       expect(extendedNode.metadata[0]).toEqual(metadata);
     });
   });
@@ -138,7 +138,7 @@ describe("Given Object.extend static method exist", () => {
 describe("Given Object.move static method exist", () => {
   describe("when updateNode = Object.move(node, coordinates)", () => {
     let node: ObjectNode;
-    let coordinates: ObjectCoordinates;
+    let coordinates;
     let updatedNode: ObjectNode;
     beforeEach(() => {
       node = Object.create({
@@ -148,7 +148,8 @@ describe("Given Object.move static method exist", () => {
         icon: "./icon.svg",
       });
       coordinates = { x: 1, y: 1 };
-      updatedNode = Object.move(node, coordinates);
+      let input = structuredClone(node);
+      updatedNode = Object.move(input, coordinates);
     });
     it("then updatedNode exist", () => {
       expect(updatedNode).toBeDefined();
@@ -177,10 +178,10 @@ describe("Given Object.move static method exist", () => {
     it("then updatedNode.type equals node.type", () => {
       expect(updatedNode.type).toEqual(node.type);
     });
-    it("then result.coordinates equals coordinates", () => {
+    it("then updatedNode.coordinates equals coordinates", () => {
       expect(updatedNode.coordinates).toEqual(coordinates);
     });
-    it("then result.coordinates is not equal to node.coordinates", () => {
+    it("then updatedNode.coordinates is not equal to node.coordinates", () => {
       expect(updatedNode.coordinates).not.toEqual(node.coordinates);
     });
     it("then updatedNode.icon equals node.icon", () => {

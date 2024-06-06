@@ -10,6 +10,7 @@
   "scripts": {
     "clean.test": "node ./tasks/clean.test.mjs",
     "clean.lib": "node ./tasks/clean.lib.mjs",
+    "clean": "npm run clean.test && npm run clean.lib",
     "build.test": "npm run clean.test && tsc -p build.test.json",
     "pretest": "npm run build.test",
     "test": "karma start",

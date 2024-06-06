@@ -45,7 +45,7 @@ export class Graph {
         );
   };
 
-  moveAllNodes = (nodes: Nodes, offset): Nodes => {
+  moveAllNodes = (nodes: Nodes, offset: { x: number, y: number }): Nodes => {
     let moveNode = (node, coordinates) => this.node.move(node, coordinates);
     return this.node.structure === "object"
       ? nodes.map((node: ObjectNode) =>
